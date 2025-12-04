@@ -2,6 +2,7 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Star, Quote } from "lucide-react";
+import TestimonialSlider from "@/components/TestimonialSlider";
 
 const testimonials = [
   {
@@ -116,9 +117,21 @@ const Testimonials = () => {
         </div>
       </section>
 
+      {/* Featured Testimonial Slider */}
+      <section className="section-padding bg-secondary">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Reviews</h2>
+            <p className="text-muted-foreground">Hear directly from our satisfied clients</p>
+          </div>
+          <TestimonialSlider testimonials={testimonials.slice(0, 5)} />
+        </div>
+      </section>
+
       {/* Testimonials Grid */}
       <section className="section-padding">
         <div className="container-custom">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">All Reviews</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {testimonials.map((testimonial, index) => (
               <div 

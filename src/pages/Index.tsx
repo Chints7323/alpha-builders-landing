@@ -1,14 +1,23 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/layout/Layout";
+import ServicesMarquee from "@/components/ServicesMarquee";
+import ScrollScale from "@/components/ScrollScale";
+import TestimonialSlider from "@/components/TestimonialSlider";
 import { 
-  Phone, Shield, Award, Clock, Users, Home, Building2, 
-  Wrench, Zap, ChevronRight, Star, MapPin 
+  Phone, Shield, Award, Clock, Home, Building2, 
+  Wrench, Zap, ChevronRight, MapPin, Bath, Hammer, Fence, Paintbrush
 } from "lucide-react";
 import heroImage from "@/assets/hero-construction.jpg";
 import projectKitchen from "@/assets/project-kitchen.jpg";
 import projectLoft from "@/assets/project-loft.jpg";
 import projectExtension from "@/assets/project-extension.jpg";
+
+const testimonials = [
+  { name: "Sarah M.", location: "Stanmore", project: "Kitchen Renovation", text: "Excellent work on our kitchen renovation. Professional team, clean and tidy. Highly recommend!", rating: 5 },
+  { name: "David R.", location: "Harrow", project: "Loft Conversion", text: "Alpha Global completed our loft conversion on time and budget. Outstanding quality throughout.", rating: 5 },
+  { name: "Emma T.", location: "Wembley", project: "Extension", text: "Fantastic experience from start to finish. They explained every step clearly. Very happy with our extension.", rating: 5 },
+];
 
 const Index = () => {
   return (
@@ -49,6 +58,12 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Services Marquee */}
+      <ServicesMarquee />
+
+      {/* Scroll Scale */}
+      <ScrollScale />
 
       {/* Why Us Section */}
       <section className="section-padding bg-secondary">
@@ -113,10 +128,10 @@ const Index = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: Home, title: "Residential Construction", desc: "Extensions, loft conversions, renovations" },
-              { icon: Wrench, title: "Kitchens & Bathrooms", desc: "Complete design and installation" },
+              { icon: Bath, title: "Kitchens & Bathrooms", desc: "Complete design and installation" },
               { icon: Building2, title: "Commercial Projects", desc: "Office fit-outs and retail spaces" },
-              { icon: Users, title: "General Building", desc: "Brickwork, carpentry, painting" },
-              { icon: MapPin, title: "Outdoor & Structural", desc: "Driveways, fencing, roofing" },
+              { icon: Hammer, title: "General Building", desc: "Brickwork, carpentry, painting" },
+              { icon: Fence, title: "Outdoor & Structural", desc: "Driveways, fencing, roofing" },
               { icon: Zap, title: "Energy & Smart Systems", desc: "Solar, heat pumps, smart wiring" },
             ].map((service, index) => (
               <Link 
@@ -180,7 +195,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials Preview */}
+      {/* Testimonials Slider */}
       <section className="section-padding">
         <div className="container-custom">
           <div className="text-center mb-12">
@@ -190,26 +205,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { name: "Sarah M.", location: "Stanmore", text: "Excellent work on our kitchen renovation. Professional team, clean and tidy. Highly recommend!" },
-              { name: "David R.", location: "Harrow", text: "Alpha Global completed our loft conversion on time and budget. Outstanding quality throughout." },
-              { name: "Emma T.", location: "Wembley", text: "Fantastic experience from start to finish. They explained every step clearly. Very happy with our extension." },
-            ].map((review, index) => (
-              <div key={index} className="bg-card p-6 rounded-lg shadow-card border border-border">
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="text-foreground mb-4 italic">"{review.text}"</p>
-                <div>
-                  <p className="font-semibold">{review.name}</p>
-                  <p className="text-muted-foreground text-sm">{review.location}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <TestimonialSlider testimonials={testimonials} />
 
           <div className="text-center mt-8">
             <Button asChild variant="outline">
