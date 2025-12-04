@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -23,7 +24,24 @@ const projects = [
 ];
 
 const Projects = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const [activeCategory, setActiveCategory] = useState(categoryParam || "All");
+
+  useEffect(() => {
+    if (categoryParam && categories.includes(categoryParam)) {
+      setActiveCategory(categoryParam);
+    }
+  }, [categoryParam]);
+
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
+    if (category === "All") {
+      setSearchParams({});
+    } else {
+      setSearchParams({ category });
+    }
+  };
 
   const filteredProjects = activeCategory === "All" 
     ? projects 
@@ -45,7 +63,7 @@ const Projects = () => {
       </section>
 
       {/* Filter */}
-      <section className="py-8 border-b border-border sticky top-20 bg-background z-40">
+      <section className="py-8 border-b border-border sticky top-20 lg:top-[7.5rem] bg-background z-40">
         <div className="container-custom">
           <div className="flex flex-wrap gap-2">
             {categories.map((category) => (
@@ -53,7 +71,7 @@ const Projects = () => {
                 key={category}
                 variant={activeCategory === category ? "default" : "outline"}
                 size="sm"
-                onClick={() => setActiveCategory(category)}
+                onClick={() => handleCategoryChange(category)}
               >
                 {category}
               </Button>
