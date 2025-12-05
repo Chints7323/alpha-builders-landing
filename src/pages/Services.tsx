@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { 
   Home, Bath, Building2, Hammer, Fence, Zap, 
-  ChevronRight, CheckCircle2, ExternalLink
+  ChevronRight, CheckCircle2, Phone
 } from "lucide-react";
 import projectKitchen from "@/assets/project-kitchen.jpg";
 import projectLoft from "@/assets/project-loft.jpg";
@@ -15,7 +16,8 @@ const services = [
   {
     icon: Home,
     title: "Residential Construction & Renovation",
-    description: "Transform your home with our comprehensive residential services. From new builds to complete renovations, we deliver quality results.",
+    slug: "residential",
+    description: "Transform your home with our comprehensive residential services. From new builds to complete renovations, we deliver quality results that exceed expectations.",
     items: ["House extensions", "Loft conversions", "Interior renovation", "Basement conversions", "New build homes", "Structural alterations"],
     category: "Residential",
     images: [projectExtension, projectLoft]
@@ -23,7 +25,8 @@ const services = [
   {
     icon: Bath,
     title: "Kitchens & Bathrooms",
-    description: "Create beautiful, functional spaces with our expert kitchen and bathroom installation services.",
+    slug: "kitchens-bathrooms",
+    description: "Create beautiful, functional spaces with our expert kitchen and bathroom installation services. We handle design through to completion.",
     items: ["Kitchen design & installation", "Bathroom renovation", "Wet rooms", "En-suite bathrooms", "Utility rooms", "Tiling & flooring"],
     category: "Kitchens",
     images: [projectKitchen, projectBathroom]
@@ -31,7 +34,8 @@ const services = [
   {
     icon: Building2,
     title: "Commercial Construction",
-    description: "Professional commercial construction services for businesses of all sizes across North West London.",
+    slug: "commercial",
+    description: "Professional commercial construction services for businesses of all sizes across North West London. Minimal disruption, maximum results.",
     items: ["Office fit-outs", "Retail spaces", "Restaurant & hospitality", "Warehouse conversions", "Shop fronts", "Commercial renovations"],
     category: "Commercial",
     images: [projectCommercial]
@@ -39,7 +43,8 @@ const services = [
   {
     icon: Hammer,
     title: "General Building & Maintenance",
-    description: "Reliable building and maintenance services for all your property needs.",
+    slug: "general-building",
+    description: "Reliable building and maintenance services for all your property needs. From minor repairs to major renovations.",
     items: ["Painting & decorating", "Brickwork & masonry", "Plastering", "Carpentry & joinery", "Door & window fitting", "General repairs"],
     category: "Residential",
     images: [projectExtension, projectLoft]
@@ -47,7 +52,8 @@ const services = [
   {
     icon: Fence,
     title: "Outdoor & Structural",
-    description: "Enhance your property's exterior with our outdoor construction and structural services.",
+    slug: "outdoor-structural",
+    description: "Enhance your property's exterior with our outdoor construction and structural services. Built to last.",
     items: ["Driveways & patios", "Fencing & gates", "Roofing repairs", "Guttering", "Garden walls", "Decking & landscaping"],
     category: "Extensions",
     images: [projectExtension]
@@ -55,7 +61,8 @@ const services = [
   {
     icon: Zap,
     title: "Energy & Smart Systems",
-    description: "Future-proof your property with energy-efficient and smart home solutions.",
+    slug: "energy-smart",
+    description: "Future-proof your property with energy-efficient and smart home solutions. Save money while helping the environment.",
     items: ["Solar panel installation", "Heat pump systems", "Smart home wiring", "Electrical installations", "Plumbing services", "LED lighting upgrades"],
     category: "Residential",
     images: [projectLoft, projectKitchen]
@@ -63,6 +70,8 @@ const services = [
 ];
 
 const Services = () => {
+  const [expandedService, setExpandedService] = useState<string | null>(null);
+
   return (
     <Layout>
       {/* Hero */}
@@ -78,68 +87,89 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* Services List */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="space-y-20">
+          <div className="space-y-0">
             {services.map((service, index) => (
-              <div 
-                key={index}
-                className={`grid lg:grid-cols-2 gap-8 lg:gap-12 items-start ${
-                  index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                }`}
-              >
-                {/* Content */}
-                <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
-                    <service.icon className="h-8 w-8 text-primary" />
-                  </div>
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4">{service.title}</h2>
-                  <p className="text-muted-foreground mb-6">{service.description}</p>
-                  <ul className="grid grid-cols-2 gap-3 mb-6">
-                    {service.items.map((item, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm">
-                        <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button asChild>
-                    <Link to="/contact">
-                      Get a Quote
-                      <ChevronRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-
-                {/* Image Thumbnails */}
-                <div className={`${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <div className="grid grid-cols-2 gap-4">
-                    {service.images.map((image, imgIndex) => (
-                      <Link
-                        key={imgIndex}
-                        to={`/projects?category=${service.category}`}
-                        className="group relative overflow-hidden rounded-lg shadow-card card-hover"
-                      >
-                        <img 
-                          src={image} 
-                          alt={`${service.title} project ${imgIndex + 1}`}
-                          className="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/60 transition-colors duration-300 flex items-center justify-center">
-                          <ExternalLink className="h-8 w-8 text-accent-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div key={index}>
+                <div className="py-10">
+                  <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+                    {/* Left: Content */}
+                    <div className="flex-1">
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <service.icon className="h-7 w-7 text-primary" />
                         </div>
-                      </Link>
-                    ))}
+                        <div className="flex-1">
+                          <h2 className="text-2xl font-bold mb-2">{service.title}</h2>
+                          <p className="text-muted-foreground">
+                            {service.description.substring(0, 100)}...
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Service items preview */}
+                      <div className="grid grid-cols-2 gap-2 mb-4 ml-0 lg:ml-[4.5rem]">
+                        {service.items.slice(0, 4).map((item, i) => (
+                          <span key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex flex-wrap gap-3 ml-0 lg:ml-[4.5rem]">
+                        <Button asChild size="sm">
+                          <Link to={`/services/${service.slug}`}>
+                            Read More
+                            <ChevronRight className="h-4 w-4" />
+                          </Link>
+                        </Button>
+                        <Button asChild variant="outline" size="sm">
+                          <Link to={`/projects?category=${service.category}`}>
+                            View Projects
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Right: Image thumbnails */}
+                    <div className="lg:w-80 flex-shrink-0">
+                      <div className={`grid ${service.images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'} gap-3`}>
+                        {service.images.map((image, imgIndex) => (
+                          <Link
+                            key={imgIndex}
+                            to={`/projects?category=${service.category}`}
+                            className="group relative overflow-hidden rounded-lg aspect-square"
+                          >
+                            <img 
+                              src={image} 
+                              alt={`${service.title} project`}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/40 transition-colors duration-300" />
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <Link 
-                    to={`/projects?category=${service.category}`}
-                    className="flex items-center gap-2 mt-4 text-primary font-medium hover:underline"
-                  >
-                    View all {service.category.toLowerCase()} projects
-                    <ChevronRight className="h-4 w-4" />
-                  </Link>
                 </div>
+                
+                {/* Separator */}
+                {index < services.length - 1 && (
+                  <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-border"></div>
+                    </div>
+                    <div className="relative flex justify-center">
+                      <div className="bg-background px-4">
+                        <div className="w-2 h-2 bg-primary/30 rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -155,9 +185,17 @@ const Services = () => {
           <p className="text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
             Don't see exactly what you're looking for? Contact us to discuss your specific requirements.
           </p>
-          <Button asChild variant="secondary" size="xl">
-            <Link to="/contact">Contact Us Today</Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild variant="secondary" size="xl">
+              <Link to="/contact">Get a Quote</Link>
+            </Button>
+            <Button asChild variant="outline" size="xl" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+              <a href="tel:+447123456789" className="gap-2">
+                <Phone className="h-5 w-5" />
+                Call Now
+              </a>
+            </Button>
+          </div>
         </div>
       </section>
     </Layout>
