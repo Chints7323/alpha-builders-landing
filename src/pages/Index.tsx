@@ -6,7 +6,7 @@ import ScrollScale from "@/components/ScrollScale";
 import TestimonialSlider from "@/components/TestimonialSlider";
 import { 
   Phone, Shield, Award, Clock, Home, Building2, 
-  Wrench, Zap, ChevronRight, MapPin, Bath, Hammer, Fence, Paintbrush
+  ChevronRight, MapPin, Bath, Hammer, Fence, Zap
 } from "lucide-react";
 import heroImage from "@/assets/hero-construction.jpg";
 import projectKitchen from "@/assets/project-kitchen.jpg";
@@ -17,6 +17,7 @@ const testimonials = [
   { name: "Sarah M.", location: "Stanmore", project: "Kitchen Renovation", text: "Excellent work on our kitchen renovation. Professional team, clean and tidy. Highly recommend!", rating: 5 },
   { name: "David R.", location: "Harrow", project: "Loft Conversion", text: "Alpha Global completed our loft conversion on time and budget. Outstanding quality throughout.", rating: 5 },
   { name: "Emma T.", location: "Wembley", project: "Extension", text: "Fantastic experience from start to finish. They explained every step clearly. Very happy with our extension.", rating: 5 },
+  { name: "James K.", location: "Edgware", project: "Bathroom", text: "Beautiful bathroom renovation. The team was professional and the finish is perfect.", rating: 5 },
 ];
 
 const Index = () => {
@@ -61,9 +62,6 @@ const Index = () => {
 
       {/* Services Marquee */}
       <ServicesMarquee />
-
-      {/* Scroll Scale */}
-      <ScrollScale />
 
       {/* Why Us Section */}
       <section className="section-padding bg-secondary">
@@ -255,6 +253,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Scroll Scale - subtle separator */}
+      <ScrollScale />
 
       {/* CTA Section */}
       <section className="section-padding bg-primary">

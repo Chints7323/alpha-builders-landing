@@ -175,7 +175,7 @@
     }
   }
 
-  /* Marquee animation */
+  /* Marquee animation - faster */
   .marquee-container {
     overflow: hidden;
     width: 100%;
@@ -183,7 +183,7 @@
 
   .marquee-content {
     display: flex;
-    animation: marquee 30s linear infinite;
+    animation: marquee 15s linear infinite;
   }
 
   @keyframes marquee {
@@ -197,5 +197,19 @@
 
   .marquee-container:hover .marquee-content {
     animation-play-state: paused;
+  }
+
+  /* Building loading animation */
+  @keyframes building {
+    0%, 100% {
+      height: 8px;
+    }
+    50% {
+      height: 40px;
+    }
+  }
+
+  .animate-building {
+    animation: building 1s ease-in-out infinite;
   }
 }
