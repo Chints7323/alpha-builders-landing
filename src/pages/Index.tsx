@@ -20,6 +20,15 @@ const testimonials = [
   { name: "James K.", location: "Edgware", project: "Bathroom", text: "Beautiful bathroom renovation. The team was professional and the finish is perfect.", rating: 5 },
 ];
 
+const serviceItems = [
+  { icon: Home, title: "Residential Construction", desc: "Extensions, loft conversions, renovations", slug: "residential" },
+  { icon: Bath, title: "Kitchens & Bathrooms", desc: "Complete design and installation", slug: "kitchens-bathrooms" },
+  { icon: Building2, title: "Commercial Projects", desc: "Office fit-outs and retail spaces", slug: "commercial" },
+  { icon: Hammer, title: "General Building", desc: "Brickwork, carpentry, painting", slug: "general-building" },
+  { icon: Fence, title: "Outdoor & Structural", desc: "Driveways, fencing, roofing", slug: "outdoor-structural" },
+  { icon: Zap, title: "Energy & Smart Systems", desc: "Solar, heat pumps, smart wiring", slug: "energy-smart" },
+];
+
 const Index = () => {
   return (
     <Layout>
@@ -124,17 +133,10 @@ const Index = () => {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: Home, title: "Residential Construction", desc: "Extensions, loft conversions, renovations" },
-              { icon: Bath, title: "Kitchens & Bathrooms", desc: "Complete design and installation" },
-              { icon: Building2, title: "Commercial Projects", desc: "Office fit-outs and retail spaces" },
-              { icon: Hammer, title: "General Building", desc: "Brickwork, carpentry, painting" },
-              { icon: Fence, title: "Outdoor & Structural", desc: "Driveways, fencing, roofing" },
-              { icon: Zap, title: "Energy & Smart Systems", desc: "Solar, heat pumps, smart wiring" },
-            ].map((service, index) => (
+            {serviceItems.map((service, index) => (
               <Link 
                 key={index}
-                to="/services"
+                to={`/services/${service.slug}`}
                 className="group p-6 bg-card border border-border rounded-lg card-hover"
               >
                 <div className="w-12 h-12 mb-4 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary transition-colors">
@@ -239,6 +241,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Scroll Scale - above founder */}
+      <ScrollScale inverted />
+
       {/* Founder Message */}
       <section className="section-padding">
         <div className="container-custom">
@@ -254,7 +259,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Scroll Scale - subtle separator */}
+      {/* Scroll Scale - below founder */}
       <ScrollScale />
 
       {/* CTA Section */}

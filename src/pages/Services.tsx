@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -70,8 +69,6 @@ const services = [
 ];
 
 const Services = () => {
-  const [expandedService, setExpandedService] = useState<string | null>(null);
-
   return (
     <Layout>
       {/* Hero */}
@@ -120,50 +117,52 @@ const Services = () => {
                       </div>
 
                       {/* Actions */}
-                      <div className="flex flex-wrap gap-3 ml-0 lg:ml-[4.5rem]">
-                        <Button asChild size="sm">
-                          <Link to={`/services/${service.slug}`}>
-                            Read More
-                            <ChevronRight className="h-4 w-4" />
-                          </Link>
-                        </Button>
+                      <div className="flex flex-wrap items-center gap-3 ml-0 lg:ml-[4.5rem]">
+                        <Link 
+                          to={`/services/${service.slug}`}
+                          className="text-sm text-primary hover:underline font-medium inline-flex items-center gap-1"
+                        >
+                          Read More
+                          <ChevronRight className="h-4 w-4" />
+                        </Link>
+                        <span className="text-border">|</span>
                         <Button asChild variant="outline" size="sm">
                           <a href="tel:+447123456789" className="gap-2">
                             <Phone className="h-4 w-4" />
                             Call Us
                           </a>
                         </Button>
-                        <Button asChild variant="ghost" size="sm">
+                        <Button asChild size="sm">
                           <Link to="/contact">Get a Quote</Link>
                         </Button>
                       </div>
                     </div>
 
                     {/* Right: Image thumbnails - Consistent grid */}
-                    <div className="lg:w-72 flex-shrink-0">
+                    <div className="lg:w-64 flex-shrink-0">
                       <div className="bg-secondary/50 p-3 rounded-lg">
                         <div className="grid grid-cols-2 gap-2">
-                          {service.images.slice(0, 2).map((image, imgIndex) => (
+                          {[0, 1].map((imgIndex) => (
                             <div
                               key={imgIndex}
-                              className="group relative overflow-hidden rounded-md aspect-square"
+                              className="group relative overflow-hidden rounded-md aspect-square bg-muted"
                             >
-                              <img 
-                                src={image} 
-                                alt={`${service.title} project`}
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                              />
+                              {service.images[imgIndex] ? (
+                                <img 
+                                  src={service.images[imgIndex]} 
+                                  alt={`${service.title} project`}
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center">
+                                  <span className="text-muted-foreground text-xs">Coming</span>
+                                </div>
+                              )}
                             </div>
                           ))}
-                          {/* Fill empty slots to maintain consistent layout */}
-                          {service.images.length === 1 && (
-                            <div className="bg-muted rounded-md aspect-square flex items-center justify-center">
-                              <span className="text-muted-foreground text-xs">More soon</span>
-                            </div>
-                          )}
                         </div>
                         <Link 
-                          to={`/projects?category=${service.category}`}
+                          to={`/projects?category=${encodeURIComponent(service.category)}`}
                           className="block text-center text-sm text-primary hover:underline mt-3 font-medium"
                         >
                           View All Projects →
