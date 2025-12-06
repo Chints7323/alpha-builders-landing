@@ -6,8 +6,8 @@ const ScrollScale = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const maxOffset = 80;
-      const newOffset = Math.min(scrollY * 0.15, maxOffset);
+      const maxOffset = 100;
+      const newOffset = Math.min(scrollY * 0.08, maxOffset);
       setOffset(newOffset);
     };
 
@@ -15,13 +15,13 @@ const ScrollScale = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const tickCount = 60;
+  const tickCount = 80;
   const ticks = Array.from({ length: tickCount }, (_, i) => i);
 
   return (
-    <div className="w-full overflow-hidden py-3 bg-gradient-to-r from-background via-secondary to-background">
+    <div className="w-full overflow-hidden py-2">
       <div 
-        className="flex items-end gap-0 transition-transform duration-200 ease-out"
+        className="flex items-end gap-0 transition-transform duration-300 ease-out"
         style={{ transform: `translateX(${offset}px)` }}
       >
         {ticks.map((tick) => {
@@ -29,14 +29,14 @@ const ScrollScale = () => {
           const isMedium = tick % 5 === 0 && !isMajor;
           
           return (
-            <div key={tick} className="flex flex-col items-center" style={{ width: '30px' }}>
+            <div key={tick} className="flex flex-col items-center" style={{ width: '20px' }}>
               <div 
                 className={`w-px transition-all ${
                   isMajor 
-                    ? 'h-4 bg-border' 
+                    ? 'h-3 bg-border/50' 
                     : isMedium 
-                      ? 'h-2.5 bg-border/60' 
-                      : 'h-1.5 bg-border/40'
+                      ? 'h-2 bg-border/30' 
+                      : 'h-1 bg-border/20'
                 }`}
               />
             </div>

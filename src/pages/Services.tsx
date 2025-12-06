@@ -128,30 +128,46 @@ const Services = () => {
                           </Link>
                         </Button>
                         <Button asChild variant="outline" size="sm">
-                          <Link to={`/projects?category=${service.category}`}>
-                            View Projects
-                          </Link>
+                          <a href="tel:+447123456789" className="gap-2">
+                            <Phone className="h-4 w-4" />
+                            Call Us
+                          </a>
+                        </Button>
+                        <Button asChild variant="ghost" size="sm">
+                          <Link to="/contact">Get a Quote</Link>
                         </Button>
                       </div>
                     </div>
 
-                    {/* Right: Image thumbnails */}
-                    <div className="lg:w-80 flex-shrink-0">
-                      <div className={`grid ${service.images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'} gap-3`}>
-                        {service.images.map((image, imgIndex) => (
-                          <Link
-                            key={imgIndex}
-                            to={`/projects?category=${service.category}`}
-                            className="group relative overflow-hidden rounded-lg aspect-square"
-                          >
-                            <img 
-                              src={image} 
-                              alt={`${service.title} project`}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
-                            <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/40 transition-colors duration-300" />
-                          </Link>
-                        ))}
+                    {/* Right: Image thumbnails - Consistent grid */}
+                    <div className="lg:w-72 flex-shrink-0">
+                      <div className="bg-secondary/50 p-3 rounded-lg">
+                        <div className="grid grid-cols-2 gap-2">
+                          {service.images.slice(0, 2).map((image, imgIndex) => (
+                            <div
+                              key={imgIndex}
+                              className="group relative overflow-hidden rounded-md aspect-square"
+                            >
+                              <img 
+                                src={image} 
+                                alt={`${service.title} project`}
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                              />
+                            </div>
+                          ))}
+                          {/* Fill empty slots to maintain consistent layout */}
+                          {service.images.length === 1 && (
+                            <div className="bg-muted rounded-md aspect-square flex items-center justify-center">
+                              <span className="text-muted-foreground text-xs">More soon</span>
+                            </div>
+                          )}
+                        </div>
+                        <Link 
+                          to={`/projects?category=${service.category}`}
+                          className="block text-center text-sm text-primary hover:underline mt-3 font-medium"
+                        >
+                          View All Projects →
+                        </Link>
                       </div>
                     </div>
                   </div>

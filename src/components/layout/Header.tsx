@@ -54,11 +54,13 @@ const Header = () => {
             to="/" 
             className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center"
           >
-            <img 
-              src={logo} 
-              alt="Alpha Global Builders" 
-              className="h-20 lg:h-28 w-auto"
-            />
+            <div className="bg-background/80 backdrop-blur-sm rounded-lg p-2 shadow-soft border border-border/30">
+              <img 
+                src={logo} 
+                alt="Alpha Global Builders" 
+                className="h-16 lg:h-24 w-auto"
+              />
+            </div>
           </Link>
 
           {/* Right Actions */}
