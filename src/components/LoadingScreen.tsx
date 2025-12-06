@@ -26,7 +26,7 @@ const LoadingScreen = () => {
       <img 
         src={logo} 
         alt="Alpha Global Builders" 
-        className="h-24 w-auto mb-8 animate-pulse"
+        className="h-36 w-auto mb-8 animate-pulse"
       />
       
       {/* Building animation */}
