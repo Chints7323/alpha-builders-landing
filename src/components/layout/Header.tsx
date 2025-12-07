@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,13 +16,13 @@ const Header = () => {
   const location = useLocation();
 
   return (
-    <header className="fixed top-8 left-0 right-0 z-50">
+    <header className="absolute top-0 left-0 right-0 z-50 pt-8">
       <div className="container-custom">
-        {/* Floating navbar with solid black background */}
-        <div className="relative bg-foreground/95 backdrop-blur-sm rounded-lg shadow-elevated mx-auto max-w-5xl">
-          <div className="flex items-center justify-between h-16 px-6">
+        {/* Floating navbar with solid dark background */}
+        <div className="relative bg-foreground/95 backdrop-blur-sm rounded-xl shadow-elevated mx-auto max-w-5xl">
+          <div className="flex items-center justify-between h-14 px-8">
             {/* Left Navigation */}
-            <nav className="hidden lg:flex items-center gap-6 flex-shrink-0">
+            <nav className="hidden lg:flex items-center gap-8 flex-shrink-0">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
@@ -38,16 +38,16 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Center Logo with box - positioned to extend above navbar */}
+            {/* Center Logo with white box - positioned to extend above navbar */}
             <Link 
               to="/" 
-              className="absolute left-1/2 -translate-x-1/2 -top-4 flex items-center justify-center"
+              className="absolute left-1/2 -translate-x-1/2 -top-3 flex items-center justify-center"
             >
-              <div className="bg-background rounded-lg p-3 shadow-elevated">
+              <div className="bg-background rounded-lg p-2 shadow-elevated">
                 <img 
                   src={logo} 
                   alt="Alpha Global Builders" 
-                  className="h-20 w-auto"
+                  className="h-16 w-auto"
                 />
               </div>
             </Link>

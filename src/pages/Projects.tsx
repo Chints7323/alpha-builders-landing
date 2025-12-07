@@ -50,7 +50,7 @@ const Projects = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="bg-accent text-accent-foreground section-padding">
+      <section className="bg-accent text-accent-foreground pt-32 pb-16">
         <div className="container-custom">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Projects</h1>
@@ -63,7 +63,7 @@ const Projects = () => {
       </section>
 
       {/* Filter */}
-      <section className="py-8 border-b border-border sticky top-20 lg:top-[7.5rem] bg-background z-40">
+      <section className="py-8 border-b border-border sticky top-0 bg-background z-40">
         <div className="container-custom">
           <div className="flex flex-wrap gap-2">
             {categories.map((category) => (
