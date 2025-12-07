@@ -7,7 +7,7 @@ const About = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="bg-accent text-accent-foreground section-padding">
+      <section className="bg-accent text-accent-foreground pt-32 pb-16">
         <div className="container-custom">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">About Us</h1>

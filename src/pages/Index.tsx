@@ -32,8 +32,8 @@ const serviceItems = [
 const Index = () => {
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center">
+      {/* Hero Section - starts from top, navbar floats inside */}
+      <section className="relative min-h-screen flex items-center pt-32">
         <div className="absolute inset-0 z-0">
           <img
             src={heroImage}
