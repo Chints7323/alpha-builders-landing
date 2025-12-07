@@ -25,9 +25,9 @@ const ScrollScale = ({ inverted = false }: ScrollScaleProps) => {
   const ticks = Array.from({ length: tickCount }, (_, i) => i);
 
   return (
-    <div className="w-full overflow-hidden py-3">
+    <div className="w-full overflow-hidden py-2">
       <div 
-        className="flex items-end gap-0 transition-transform duration-500 ease-out"
+        className="flex items-end gap-0 transition-transform duration-300 ease-out"
         style={{ transform: `translateX(${offset}px)` }}
       >
         {ticks.map((tick) => {
@@ -35,14 +35,14 @@ const ScrollScale = ({ inverted = false }: ScrollScaleProps) => {
           const isMedium = tick % 5 === 0 && !isMajor;
           
           return (
-            <div key={tick} className="flex flex-col items-center" style={{ width: '16px' }}>
+            <div key={tick} className="flex flex-col items-center" style={{ width: '14px' }}>
               <div 
                 className={`w-px transition-all ${
                   isMajor 
-                    ? 'h-4 bg-border' 
+                    ? 'h-3 bg-foreground/40' 
                     : isMedium 
-                      ? 'h-2.5 bg-border/70' 
-                      : 'h-1.5 bg-border/50'
+                      ? 'h-2 bg-foreground/30' 
+                      : 'h-1 bg-foreground/20'
                 }`}
               />
             </div>

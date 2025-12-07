@@ -9,8 +9,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="bg-background rounded p-3 inline-block">
-              <img src={logo} alt="Alpha Global Builders" className="h-28 w-auto" />
+            <div className="bg-background rounded p-1 inline-block">
+              <img src={logo} alt="Alpha Global Builders" className="h-32 w-auto" />
             </div>
             <p className="text-accent-foreground/80 text-sm leading-relaxed">
               Trusted residential and commercial construction across North West London. 
