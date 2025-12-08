@@ -45,14 +45,16 @@ const Index = () => {
         
         <div className="container-custom relative z-10">
           <div className="max-w-2xl text-accent-foreground animate-fade-up">
-            <p className="text-primary font-semibold mb-4 text-lg">Welcome to Alpha Global Builders</p>
+            <p className="text-primary font-semibold mb-4 text-lg">Welcome to</p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Trusted. High Quality.{" "}
-              <span className="text-primary">Responsible.</span>
+              <span className="text-primary">Alpha Global Builders</span>
             </h1>
+            <p className="text-2xl md:text-3xl font-bold mb-4 text-accent-foreground">
+              Trusted. High Quality. <span className="text-primary">Responsible.</span>
+            </p>
             <p className="text-lg md:text-xl text-accent-foreground/90 mb-8 leading-relaxed">
               Residential and commercial construction across North West London. 
-              7+ years of experience. Customer first approach.
+              8+ years of experience. Customer first approach.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild variant="hero" size="xl">
@@ -76,7 +78,7 @@ const Index = () => {
       <section className="section-padding bg-secondary">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Us</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose <span className="text-primary">Alpha Global Builders</span></h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               We deliver exceptional results through dedication, expertise, and a commitment to quality.
             </p>
@@ -87,7 +89,7 @@ const Index = () => {
               {
                 icon: Shield,
                 title: "Trusted & Reliable",
-                description: "7+ years of proven experience with hundreds of satisfied customers across North West London."
+                description: "8+ years of proven experience with hundreds of satisfied customers across North West London."
               },
               {
                 icon: Award,
@@ -137,12 +139,12 @@ const Index = () => {
               <Link 
                 key={index}
                 to={`/services/${service.slug}`}
-                className="group p-6 bg-card border border-border rounded-lg card-hover"
+                className="group p-6 bg-card border border-border rounded-lg card-hover service-link-hover"
               >
-                <div className="w-12 h-12 mb-4 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary transition-colors">
-                  <service.icon className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors" />
+                <div className="service-icon w-12 h-12 mb-4 bg-primary/10 rounded-lg flex items-center justify-center transition-colors duration-300">
+                  <service.icon className="h-6 w-6 text-primary transition-colors duration-300" />
                 </div>
-                <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">{service.title}</h3>
+                <h3 className="service-title text-lg font-bold mb-2 transition-colors duration-300">{service.title}</h3>
                 <p className="text-muted-foreground text-sm">{service.desc}</p>
               </Link>
             ))}
@@ -250,9 +252,9 @@ const Index = () => {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">A Message from Our Founder</h2>
             <blockquote className="text-lg md:text-xl text-muted-foreground italic mb-6 leading-relaxed">
-              "At Alpha Global Builders, we believe in honesty, patience, and explaining every step of the process. 
+              "At <span className="text-primary font-semibold not-italic">Alpha Global Builders</span>, we believe in honesty, patience, and explaining every step of the process. 
               Our commitment to quality finishing and customer satisfaction has been the foundation of our success 
-              for over seven years. Every project, big or small, receives the same level of care and attention."
+              for over eight years. Every project, big or small, receives the same level of care and attention."
             </blockquote>
             <p className="font-bold text-lg">— The Alpha Global Builders Team</p>
           </div>

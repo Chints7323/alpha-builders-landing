@@ -16,18 +16,18 @@ const Header = () => {
   const location = useLocation();
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 pt-8">
+    <header className="fixed top-0 left-0 right-0 z-50 pt-6">
       <div className="container-custom">
         {/* Floating navbar with solid dark background */}
-        <div className="relative bg-foreground/95 backdrop-blur-sm rounded-xl shadow-elevated mx-auto max-w-5xl">
-          <div className="flex items-center justify-between h-14 px-8">
+        <div className="relative bg-foreground backdrop-blur-sm rounded-xl shadow-elevated mx-auto max-w-5xl">
+          <div className="flex items-center justify-between h-16 px-8">
             {/* Left Navigation */}
             <nav className="hidden lg:flex items-center gap-8 flex-shrink-0">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`text-sm font-bold uppercase tracking-wide transition-colors ${
+                  className={`nav-link-hover text-sm font-bold uppercase tracking-wide transition-colors ${
                     location.pathname === item.path
                       ? "text-primary"
                       : "text-white hover:text-primary"
@@ -41,20 +41,20 @@ const Header = () => {
             {/* Center Logo with white box - positioned to extend above navbar */}
             <Link 
               to="/" 
-              className="absolute left-1/2 -translate-x-1/2 -top-3 flex items-center justify-center"
+              className="absolute left-1/2 -translate-x-1/2 -top-2 flex items-center justify-center"
             >
               <div className="bg-background rounded-lg p-2 shadow-elevated">
                 <img 
                   src={logo} 
                   alt="Alpha Global Builders" 
-                  className="h-16 w-auto"
+                  className="h-14 w-auto"
                 />
               </div>
             </Link>
 
             {/* Right Actions */}
             <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
-              <Button asChild variant="outline" size="sm" className="border-white text-white hover:bg-white hover:text-foreground">
+              <Button asChild variant="navOutline" size="sm">
                 <a href="tel:+447123456789" className="gap-2">
                   <Phone className="h-4 w-4" />
                   Call Now
@@ -94,7 +94,7 @@ const Header = () => {
                   </Link>
                 ))}
                 <div className="flex flex-col gap-3 pt-4">
-                  <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-foreground">
+                  <Button asChild variant="navOutline">
                     <a href="tel:+447123456789" className="gap-2">
                       <Phone className="h-4 w-4" />
                       Call Now

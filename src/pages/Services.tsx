@@ -68,6 +68,11 @@ const services = [
   }
 ];
 
+const truncateText = (text: string, maxLength: number) => {
+  if (text.length <= maxLength) return text;
+  return text.substring(0, maxLength).trim() + "...";
+};
+
 const Services = () => {
   return (
     <Layout>
@@ -94,17 +99,26 @@ const Services = () => {
                   <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
                     {/* Left: Content */}
                     <div className="flex-1">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <service.icon className="h-7 w-7 text-primary" />
+                      <Link 
+                        to={`/services/${service.slug}`}
+                        className="flex items-start gap-4 mb-4 group service-link-hover"
+                      >
+                        <div className="service-icon w-14 h-14 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-300">
+                          <service.icon className="h-7 w-7 text-primary transition-colors duration-300" />
                         </div>
                         <div className="flex-1">
-                          <h2 className="text-2xl font-bold mb-2">{service.title}</h2>
+                          <h2 className="service-title text-2xl font-bold mb-2 transition-colors duration-300">{service.title}</h2>
                           <p className="text-muted-foreground">
-                            {service.description.substring(0, 100)}...
+                            {truncateText(service.description, 80)}
+                            <Link 
+                              to={`/services/${service.slug}`}
+                              className="text-primary hover:underline font-medium ml-1"
+                            >
+                              read more
+                            </Link>
                           </p>
                         </div>
-                      </div>
+                      </Link>
 
                       {/* Service items preview */}
                       <div className="grid grid-cols-2 gap-2 mb-4 ml-0 lg:ml-[4.5rem]">
@@ -118,14 +132,6 @@ const Services = () => {
 
                       {/* Actions */}
                       <div className="flex flex-wrap items-center gap-3 ml-0 lg:ml-[4.5rem]">
-                        <Link 
-                          to={`/services/${service.slug}`}
-                          className="text-sm text-primary hover:underline font-medium inline-flex items-center gap-1"
-                        >
-                          Read More
-                          <ChevronRight className="h-4 w-4" />
-                        </Link>
-                        <span className="text-border">|</span>
                         <Button asChild variant="outline" size="sm">
                           <a href="tel:+447123456789" className="gap-2">
                             <Phone className="h-4 w-4" />
