@@ -13,8 +13,8 @@ const Footer = () => {
               <img src={logo} alt="Alpha Global Builders" className="h-24 w-auto" />
             </div>
             <p className="text-accent-foreground/80 text-sm leading-relaxed">
-              Trusted residential and commercial construction across North West London. 
-              7+ years of experience delivering quality builds.
+              <span className="text-primary font-semibold">Building</span> Trust. <span className="text-primary font-semibold">Maintaining</span> Relationships. <span className="text-primary font-semibold">Renovating</span> Dreams.<br />
+              8+ years of quality construction across North West London.
             </p>
           </div>
 
@@ -22,13 +22,20 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              {["Home", "Services", "Projects", "Testimonials", "About", "Contact"].map((item) => (
-                <li key={item}>
+              {[
+                { label: "Home", path: "/" },
+                { label: "Services", path: "/services" },
+                { label: "Projects", path: "/projects" },
+                { label: "Testimonials", path: "/testimonials" },
+                { label: "About Us", path: "/about" },
+                { label: "Contact Us", path: "/contact" },
+              ].map((item) => (
+                <li key={item.label}>
                   <Link
-                    to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                    to={item.path}
                     className="text-accent-foreground/80 hover:text-primary transition-colors"
                   >
-                    {item}
+                    {item.label}
                   </Link>
                 </li>
               ))}
@@ -38,13 +45,24 @@ const Footer = () => {
           {/* Services */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Our Services</h4>
-            <ul className="space-y-2 text-accent-foreground/80 text-sm">
-              <li>House Extensions</li>
-              <li>Loft Conversions</li>
-              <li>Kitchen & Bathroom</li>
-              <li>Commercial Fit-outs</li>
-              <li>Roofing & Carpentry</li>
-              <li>Energy Solutions</li>
+            <ul className="space-y-2 text-sm">
+              {[
+                { label: "Residential Construction", slug: "residential" },
+                { label: "Kitchens & Bathrooms", slug: "kitchens-bathrooms" },
+                { label: "Commercial Projects", slug: "commercial" },
+                { label: "General Building", slug: "general-building" },
+                { label: "Outdoor & Structural", slug: "outdoor-structural" },
+                { label: "Energy & Smart Systems", slug: "energy-smart" },
+              ].map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    to={`/services/${service.slug}`}
+                    className="text-accent-foreground/80 hover:text-primary transition-colors"
+                  >
+                    {service.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

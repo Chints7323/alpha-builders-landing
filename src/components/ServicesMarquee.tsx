@@ -17,29 +17,26 @@ const services = [
 ];
 
 const ServicesMarquee = () => {
+  // Render 3 sets for truly seamless infinite loop
+  const renderServices = () => (
+    <>
+      {services.map((service, index) => (
+        <div key={index} className="flex items-center gap-3 mx-8 flex-shrink-0">
+          <service.icon className="h-6 w-6 text-primary-foreground" />
+          <span className="text-primary-foreground font-semibold text-lg whitespace-nowrap">
+            {service.label}
+          </span>
+        </div>
+      ))}
+    </>
+  );
+
   return (
     <div className="bg-primary py-4 overflow-hidden">
-      <div className="marquee-container">
-        <div className="marquee-content">
-          {/* First set */}
-          {services.map((service, index) => (
-            <div key={index} className="flex items-center gap-3 mx-8 flex-shrink-0">
-              <service.icon className="h-6 w-6 text-primary-foreground" />
-              <span className="text-primary-foreground font-semibold text-lg whitespace-nowrap">
-                {service.label}
-              </span>
-            </div>
-          ))}
-          {/* Duplicate for seamless loop */}
-          {services.map((service, index) => (
-            <div key={`dup-${index}`} className="flex items-center gap-3 mx-8 flex-shrink-0">
-              <service.icon className="h-6 w-6 text-primary-foreground" />
-              <span className="text-primary-foreground font-semibold text-lg whitespace-nowrap">
-                {service.label}
-              </span>
-            </div>
-          ))}
-        </div>
+      <div className="flex animate-marquee-seamless">
+        {renderServices()}
+        {renderServices()}
+        {renderServices()}
       </div>
     </div>
   );
