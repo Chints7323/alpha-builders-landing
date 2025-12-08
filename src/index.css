@@ -220,27 +220,21 @@
     }
   }
 
-  /* Marquee animation - faster */
-  .marquee-container {
-    overflow: hidden;
-    width: 100%;
-  }
-
-  .marquee-content {
-    display: flex;
-    animation: marquee 8s linear infinite;
-  }
-
-  @keyframes marquee {
+  /* Seamless marquee animation */
+  @keyframes marquee-seamless {
     from {
       transform: translateX(0);
     }
     to {
-      transform: translateX(-50%);
+      transform: translateX(-33.333%);
     }
   }
 
-  .marquee-container:hover .marquee-content {
+  .animate-marquee-seamless {
+    animation: marquee-seamless 15s linear infinite;
+  }
+
+  .animate-marquee-seamless:hover {
     animation-play-state: paused;
   }
 

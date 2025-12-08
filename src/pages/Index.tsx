@@ -50,7 +50,7 @@ const Index = () => {
               <span className="text-primary">Alpha Global Builders</span>
             </h1>
             <p className="text-2xl md:text-3xl font-bold mb-4 text-accent-foreground">
-              Trusted. High Quality. <span className="text-primary">Responsible.</span>
+              <span className="text-primary">Building</span> Trust. <span className="text-primary">Maintaining</span> Relationships. <span className="text-primary">Renovating</span> Dreams.
             </p>
             <p className="text-lg md:text-xl text-accent-foreground/90 mb-8 leading-relaxed">
               Residential and commercial construction across North West London. 
