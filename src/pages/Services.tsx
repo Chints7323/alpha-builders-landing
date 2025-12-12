@@ -5,11 +5,26 @@ import {
   Home, Bath, Building2, Hammer, Fence, Zap, 
   ChevronRight, CheckCircle2, Phone
 } from "lucide-react";
-import projectKitchen from "@/assets/project-kitchen.jpg";
-import projectLoft from "@/assets/project-loft.jpg";
-import projectBathroom from "@/assets/project-bathroom.jpg";
-import projectExtension from "@/assets/project-extension.jpg";
-import projectCommercial from "@/assets/project-commercial.jpg";
+
+// Service images
+import residential1 from "@/assets/services/residential-1.jpg";
+import residential2 from "@/assets/services/residential-2.jpg";
+import residential3 from "@/assets/services/residential-3.jpg";
+import kitchen1 from "@/assets/services/kitchen-1.jpg";
+import kitchen2 from "@/assets/services/kitchen-2.jpg";
+import kitchen3 from "@/assets/services/kitchen-3.jpg";
+import bathroom1 from "@/assets/services/bathroom-1.jpg";
+import bathroom2 from "@/assets/services/bathroom-2.jpg";
+import bathroom3 from "@/assets/services/bathroom-3.jpg";
+import commercial1 from "@/assets/services/commercial-1.jpg";
+import commercial2 from "@/assets/services/commercial-2.jpg";
+import commercial3 from "@/assets/services/commercial-3.jpg";
+import loft1 from "@/assets/services/loft-1.jpg";
+import loft2 from "@/assets/services/loft-2.jpg";
+import loft3 from "@/assets/services/loft-3.jpg";
+import outdoor1 from "@/assets/services/outdoor-1.jpg";
+import outdoor2 from "@/assets/services/outdoor-2.jpg";
+import outdoor3 from "@/assets/services/outdoor-3.jpg";
 
 const services = [
   {
@@ -19,7 +34,7 @@ const services = [
     description: "Transform your home with our comprehensive residential services. From new builds to complete renovations, we deliver quality results that exceed expectations.",
     items: ["House extensions", "Loft conversions", "Interior renovation", "Basement conversions", "New build homes", "Structural alterations"],
     category: "Residential",
-    images: [projectExtension, projectLoft]
+    images: [residential1, residential2, residential3]
   },
   {
     icon: Bath,
@@ -28,7 +43,7 @@ const services = [
     description: "Create beautiful, functional spaces with our expert kitchen and bathroom installation services. We handle design through to completion.",
     items: ["Kitchen design & installation", "Bathroom renovation", "Wet rooms", "En-suite bathrooms", "Utility rooms", "Tiling & flooring"],
     category: "Kitchens",
-    images: [projectKitchen, projectBathroom]
+    images: [kitchen1, bathroom1, kitchen2]
   },
   {
     icon: Building2,
@@ -37,7 +52,7 @@ const services = [
     description: "Professional commercial construction services for businesses of all sizes across North West London. Minimal disruption, maximum results.",
     items: ["Office fit-outs", "Retail spaces", "Restaurant & hospitality", "Warehouse conversions", "Shop fronts", "Commercial renovations"],
     category: "Commercial",
-    images: [projectCommercial]
+    images: [commercial1, commercial2, commercial3]
   },
   {
     icon: Hammer,
@@ -46,7 +61,7 @@ const services = [
     description: "Reliable building and maintenance services for all your property needs. From minor repairs to major renovations.",
     items: ["Painting & decorating", "Brickwork & masonry", "Plastering", "Carpentry & joinery", "Door & window fitting", "General repairs"],
     category: "Residential",
-    images: [projectExtension, projectLoft]
+    images: [loft1, loft2, loft3]
   },
   {
     icon: Fence,
@@ -55,7 +70,7 @@ const services = [
     description: "Enhance your property's exterior with our outdoor construction and structural services. Built to last.",
     items: ["Driveways & patios", "Fencing & gates", "Roofing repairs", "Guttering", "Garden walls", "Decking & landscaping"],
     category: "Extensions",
-    images: [projectExtension]
+    images: [outdoor1, outdoor2, outdoor3]
   },
   {
     icon: Zap,
@@ -64,7 +79,7 @@ const services = [
     description: "Future-proof your property with energy-efficient and smart home solutions. Save money while helping the environment.",
     items: ["Solar panel installation", "Heat pump systems", "Smart home wiring", "Electrical installations", "Plumbing services", "LED lighting upgrades"],
     category: "Residential",
-    images: [projectLoft, projectKitchen]
+    images: [bathroom2, bathroom3, kitchen3]
   }
 ];
 
@@ -144,11 +159,11 @@ const Services = () => {
                       </div>
                     </div>
 
-                    {/* Right: Image thumbnails - Consistent grid */}
-                    <div className="lg:w-64 flex-shrink-0">
+                    {/* Right: Image thumbnails - Consistent grid showing 3 images */}
+                    <div className="lg:w-72 flex-shrink-0">
                       <div className="bg-secondary/50 p-3 rounded-lg">
-                        <div className="grid grid-cols-2 gap-2">
-                          {[0, 1].map((imgIndex) => (
+                        <div className="grid grid-cols-3 gap-2">
+                          {[0, 1, 2].map((imgIndex) => (
                             <div
                               key={imgIndex}
                               className="group relative overflow-hidden rounded-md aspect-square bg-muted"
@@ -156,7 +171,7 @@ const Services = () => {
                               {service.images[imgIndex] ? (
                                 <img 
                                   src={service.images[imgIndex]} 
-                                  alt={`${service.title} project`}
+                                  alt={`${service.title} project ${imgIndex + 1}`}
                                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 />
                               ) : (
