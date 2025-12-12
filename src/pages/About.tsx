@@ -29,19 +29,21 @@ const About = () => {
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
                   <span className="text-primary font-semibold">Alpha Global Builders</span> started with a simple ambition: 
-                  to build something meaningful. What began as hands-on work in gardens and outdoor spaces 
-                  grew into a genuine passion for construction — from fences and patios to complete home transformations.
+                  to build something meaningful. What began as hands on work in gardens and outdoor spaces 
+                  grew into a genuine passion for construction, from fences and patios to complete home transformations.
                 </p>
                 <p>
-                  Over eight years, we've learned the trade inside out. Not from textbooks, but from 
-                  real projects, real challenges, and real customers who trusted us with their homes. 
-                  That hands-on experience shaped who we are today: a team that understands what it 
-                  takes to deliver quality work, on time, without cutting corners.
+                  Over eight years of experience in the trade, we've learned everything from the ground up. 
+                  Real projects, real challenges, and real customers who trusted us with their homes. 
+                  That hands on experience shaped who we are today. Recently, we took the next step and 
+                  formally established <span className="text-primary font-semibold">Alpha Global Builders</span> as a registered company, 
+                  bringing together years of expertise under one trusted name.
                 </p>
                 <p>
-                  Today, we specialise in interior renovations and house extensions across North West London — 
-                  the kind of projects where attention to detail makes all the difference. We've grown, 
-                  but our approach hasn't changed: treat every home like it's our own, and every customer like family.
+                  Today, we specialise in home renovations, loft conversions, house extensions, and kitchen and bathroom 
+                  refurbishments across North West London. The kind of projects where attention to detail makes all the 
+                  difference. We've grown, but our approach remains the same: treat every home like it's our own, 
+                  and every customer like family.
                 </p>
               </div>
             </div>
@@ -67,12 +69,12 @@ const About = () => {
               {
                 icon: Shield,
                 title: "Honesty First",
-                description: "We give truthful recommendations — even if it means saving you money. No surprises, no hidden costs."
+                description: "We give truthful recommendations, even if it means saving you money. No surprises, no hidden costs."
               },
               {
                 icon: Heart,
                 title: "Patience & Care",
-                description: "Good work takes time. We'd rather do it right than rush through and regret it later."
+                description: "Quality building work takes time. We do it right the first time rather than rush and regret."
               },
               {
                 icon: Eye,
@@ -81,8 +83,8 @@ const About = () => {
               },
               {
                 icon: Award,
-                title: "Quality Without Compromise",
-                description: "We take time to perfect the details. Every finish, every corner, every joint — done properly."
+                title: "Quality Craftsmanship",
+                description: "We take time to perfect the details. Every finish, every corner, every joint done properly."
               }
             ].map((value, index) => (
               <div key={index} className="bg-card p-6 rounded-lg shadow-card text-center">
@@ -107,23 +109,23 @@ const About = () => {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  We focus on honest and reliable work whilst thinking of our customers as family. 
-                  That's not just a line — it's how we operate. We take time to focus on the details 
-                  because that's what creates lasting quality.
+                  We focus on honest and reliable building work whilst thinking of our customers as family. 
+                  That's not just a line, it's how we operate. We take time to focus on the details 
+                  because that's what creates lasting quality in every renovation project.
                 </p>
                 <p>
-                  When you work with us, you get truthful recommendations. Sometimes that means we'll 
+                  When you work with us, you get truthful recommendations from experienced builders. Sometimes that means we'll 
                   suggest a simpler solution that costs less. We'd rather earn your trust than make 
                   a quick sale.
                 </p>
                 <p>
-                  We're always on site, monitoring the work, calling out any issues before they become 
-                  problems. And if something unexpected comes up? We take a step back, think it through, 
+                  We're always on site, monitoring the construction work, calling out any issues before they become 
+                  problems. And if something unexpected comes up, we take a step back, think it through, 
                   explain what's happened, and find the right solution together.
                 </p>
                 <p>
-                  Most of our work comes from recommendations — and that says everything. When your 
-                  customers become your best marketing, you know you're doing something right.
+                  Most of our work comes from customer recommendations. When your 
+                  clients become your best marketing, you know you're doing something right.
                 </p>
               </div>
             </div>
@@ -142,7 +144,7 @@ const About = () => {
               <h3 className="text-xl font-bold mb-3">Our Mission</h3>
               <p className="text-muted-foreground">
                 To deliver construction work that we'd be proud to have in our own homes. 
-                Every project, every customer, every detail — treated with the same care and respect.
+                Every renovation project, every customer, every detail treated with the same care and respect.
               </p>
             </div>
             <div className="bg-card p-8 rounded-lg shadow-card">
@@ -151,8 +153,8 @@ const About = () => {
               </div>
               <h3 className="text-xl font-bold mb-3">Our Vision</h3>
               <p className="text-muted-foreground">
-                To build a reputation as one of London's most trusted builders — not through marketing, 
-                but through the quality of our work and the relationships we build along the way.
+                To build a reputation as one of London's most trusted local builders, not through marketing, 
+                but through the quality of our building work and the relationships we create along the way.
               </p>
             </div>
           </div>
@@ -168,10 +170,10 @@ const About = () => {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Award, text: "8+ years of hands-on experience" },
+              { icon: Award, text: "8+ years of hands on experience" },
               { icon: Users, text: "Skilled, trusted tradespeople" },
-              { icon: Clock, text: "On-time project delivery" },
-              { icon: Shield, text: "Fully insured & certified" },
+              { icon: Clock, text: "On time project delivery" },
+              { icon: Shield, text: "Fully insured and certified" },
               { icon: Heart, text: "Customers treated like family" },
               { icon: Eye, text: "Clear, transparent pricing" },
             ].map((item, index) => (

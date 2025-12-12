@@ -256,7 +256,7 @@ const Index = () => {
               Our commitment to quality finishing and customer satisfaction has been the foundation of our success 
               for over eight years. Every project, big or small, receives the same level of care and attention."
             </blockquote>
-            <p className="font-bold text-lg">— The Alpha Global Builders Team</p>
+            <p className="font-bold text-lg">— Our Founder</p>
           </div>
         </div>
       </section>

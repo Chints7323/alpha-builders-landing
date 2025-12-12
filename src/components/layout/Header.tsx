@@ -18,8 +18,8 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 pt-6">
       <div className="container-custom">
-        {/* Floating navbar with solid dark background */}
-        <div className="relative bg-foreground backdrop-blur-sm rounded-xl shadow-elevated mx-auto max-w-5xl">
+        {/* Floating navbar with solid dark background and border */}
+        <div className="relative bg-foreground backdrop-blur-sm rounded-xl shadow-elevated mx-auto max-w-5xl border border-primary/50">
           <div className="flex items-center justify-between h-20 px-8">
             {/* Left Navigation */}
             <nav className="hidden lg:flex items-center gap-8 flex-shrink-0">
@@ -38,16 +38,16 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Center Logo with white box - positioned to extend above navbar */}
+            {/* Center Logo with white box - vertically centered */}
             <Link 
               to="/" 
-              className="absolute left-1/2 -translate-x-1/2 -top-6 flex items-center justify-center transition-transform duration-300 hover:scale-105"
+              className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex items-center justify-center transition-transform duration-300 hover:scale-105"
             >
-              <div className="bg-background rounded-lg p-3 shadow-elevated">
+              <div className="bg-background rounded-lg p-2 shadow-elevated">
                 <img 
                   src={logo} 
                   alt="Alpha Global Builders" 
-                  className="h-20 w-auto"
+                  className="h-14 w-auto"
                 />
               </div>
             </Link>
