@@ -43,11 +43,11 @@ const Header = () => {
               to="/" 
               className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex items-center justify-center transition-transform duration-300 hover:scale-105 z-10"
             >
-              <div className="bg-background rounded-lg p-3 shadow-elevated">
+              <div className="bg-background rounded-lg p-2.5 shadow-elevated border-2 border-primary">
                 <img 
                   src={logo} 
                   alt="Alpha Global Builders" 
-                  className="h-20 w-auto"
+                  className="h-16 w-auto"
                 />
               </div>
             </Link>

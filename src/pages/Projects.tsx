@@ -4,23 +4,23 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { MapPin } from "lucide-react";
-import projectKitchen from "@/assets/project-kitchen.jpg";
-import projectLoft from "@/assets/project-loft.jpg";
-import projectBathroom from "@/assets/project-bathroom.jpg";
-import projectExtension from "@/assets/project-extension.jpg";
-import projectCommercial from "@/assets/project-commercial.jpg";
+import kitchenImg from "@/assets/services/kitchen-3.jpg";
+import loftImg from "@/assets/services/loft-3.jpg";
+import bathroomImg from "@/assets/services/bathroom-3.jpg";
+import residentialImg from "@/assets/services/residential-1.jpg";
+import commercialImg from "@/assets/services/commercial-1.jpg";
 
 const categories = ["All", "Residential", "Kitchens", "Bathrooms", "Commercial", "Extensions"];
 
 const projects = [
-  { image: projectKitchen, title: "Modern Kitchen Renovation", category: "Kitchens", location: "Stanmore", description: "Complete kitchen redesign with custom cabinetry and marble countertops" },
-  { image: projectLoft, title: "Loft Conversion Master Suite", category: "Residential", location: "Harrow", description: "Spacious loft conversion with skylights and en-suite bathroom" },
-  { image: projectBathroom, title: "Contemporary Bathroom", category: "Bathrooms", location: "Edgware", description: "Modern walk-in shower room with chrome fixtures" },
-  { image: projectExtension, title: "Rear House Extension", category: "Extensions", location: "Wembley", description: "Open-plan living extension with bi-fold doors" },
-  { image: projectCommercial, title: "Office Fit-out", category: "Commercial", location: "Stanmore", description: "Modern open-plan office space with glass partitions" },
-  { image: projectKitchen, title: "Shaker Style Kitchen", category: "Kitchens", location: "Pinner", description: "Traditional shaker kitchen with island and pendant lighting" },
-  { image: projectExtension, title: "Side Return Extension", category: "Extensions", location: "Northwood", description: "Kitchen extension maximising natural light" },
-  { image: projectBathroom, title: "Family Bathroom Renovation", category: "Bathrooms", location: "Barnet", description: "Family bathroom with freestanding bath and heated floors" },
+  { image: kitchenImg, title: "Modern Kitchen Renovation", category: "Kitchens", location: "Stanmore", description: "Complete kitchen redesign with custom cabinetry and worktops" },
+  { image: loftImg, title: "Loft Conversion Master Suite", category: "Residential", location: "Harrow", description: "Spacious loft conversion with skylights and en-suite bathroom" },
+  { image: bathroomImg, title: "Contemporary Bathroom", category: "Bathrooms", location: "Edgware", description: "Modern walk-in shower room with chrome fixtures" },
+  { image: residentialImg, title: "Rear House Extension", category: "Extensions", location: "Wembley", description: "Open-plan living extension with bi-fold doors" },
+  { image: commercialImg, title: "Office Fit-out", category: "Commercial", location: "Stanmore", description: "Modern open-plan office space with glass partitions" },
+  { image: kitchenImg, title: "Shaker Style Kitchen", category: "Kitchens", location: "Pinner", description: "Traditional shaker kitchen with island and pendant lighting" },
+  { image: residentialImg, title: "Side Return Extension", category: "Extensions", location: "Northwood", description: "Kitchen extension maximising natural light" },
+  { image: bathroomImg, title: "Family Bathroom Renovation", category: "Bathrooms", location: "Barnet", description: "Family bathroom with freestanding bath and heated floors" },
 ];
 
 const Projects = () => {

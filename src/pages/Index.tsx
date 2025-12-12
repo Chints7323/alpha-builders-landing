@@ -9,9 +9,9 @@ import {
   ChevronRight, MapPin, Bath, Hammer, Fence, Zap
 } from "lucide-react";
 import heroImage from "@/assets/hero-construction.jpg";
-import projectKitchen from "@/assets/project-kitchen.jpg";
-import projectLoft from "@/assets/project-loft.jpg";
-import projectExtension from "@/assets/project-extension.jpg";
+import kitchenImg from "@/assets/services/kitchen-3.jpg";
+import loftImg from "@/assets/services/loft-3.jpg";
+import residentialImg from "@/assets/services/residential-1.jpg";
 
 const testimonials = [
   { name: "Sarah M.", location: "Stanmore", project: "Kitchen Renovation", text: "Excellent work on our kitchen renovation. Professional team, clean and tidy. Highly recommend!", rating: 5 },
@@ -170,9 +170,9 @@ const Index = () => {
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { image: projectKitchen, title: "Modern Kitchen Renovation", location: "Stanmore" },
-              { image: projectLoft, title: "Loft Conversion", location: "Harrow" },
-              { image: projectExtension, title: "Rear Extension", location: "Edgware" },
+              { image: kitchenImg, title: "Modern Kitchen Renovation", location: "Stanmore" },
+              { image: loftImg, title: "Loft Conversion", location: "Harrow" },
+              { image: residentialImg, title: "Rear Extension", location: "Edgware" },
             ].map((project, index) => (
               <Link 
                 key={index}
