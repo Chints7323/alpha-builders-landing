@@ -43,11 +43,11 @@ const Header = () => {
               to="/" 
               className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex items-center justify-center transition-transform duration-300 hover:scale-105 z-10"
             >
-              <div className="bg-background rounded-lg p-2.5 shadow-elevated border-2 border-primary">
+              <div className="bg-background rounded-lg p-1.5 shadow-elevated border-[3px] border-primary">
                 <img 
                   src={logo} 
                   alt="Alpha Global Builders" 
-                  className="h-16 w-auto"
+                  className="h-[68px] w-auto"
                 />
               </div>
             </Link>
@@ -79,6 +79,16 @@ const Header = () => {
           {isOpen && (
             <div className="lg:hidden border-t border-white/20 animate-fade-in">
               <nav className="flex flex-col py-4 px-6">
+                {/* Logo at top of mobile menu */}
+                <div className="flex justify-center mb-4 pb-4 border-b border-white/20">
+                  <div className="bg-background rounded-lg p-1.5 border-[3px] border-primary">
+                    <img 
+                      src={logo} 
+                      alt="Alpha Global Builders" 
+                      className="h-16 w-auto"
+                    />
+                  </div>
+                </div>
                 {navItems.map((item) => (
                   <Link
                     key={item.name}

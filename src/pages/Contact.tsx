@@ -58,7 +58,7 @@ const Contact = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="bg-accent text-accent-foreground section-padding">
+      <section className="bg-accent text-accent-foreground pt-32 pb-16">
         <div className="container-custom">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
@@ -215,7 +215,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-sm">Location</h4>
-                      <p className="text-foreground text-sm">Stanmore, North West London</p>
+                      <p className="text-foreground text-sm">Stanmore, London, United Kingdom</p>
                     </div>
                   </div>
 

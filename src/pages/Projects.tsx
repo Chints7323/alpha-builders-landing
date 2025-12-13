@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { MapPin } from "lucide-react";
+import { MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import kitchenImg from "@/assets/services/kitchen-3.jpg";
 import loftImg from "@/assets/services/loft-3.jpg";
 import bathroomImg from "@/assets/services/bathroom-3.jpg";
@@ -23,10 +23,14 @@ const projects = [
   { image: bathroomImg, title: "Family Bathroom Renovation", category: "Bathrooms", location: "Barnet", description: "Family bathroom with freestanding bath and heated floors" },
 ];
 
+const ITEMS_PER_PAGE = 9;
+
 const Projects = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get("category");
+  const pageParam = searchParams.get("page");
   const [activeCategory, setActiveCategory] = useState(categoryParam || "All");
+  const [currentPage, setCurrentPage] = useState(parseInt(pageParam || "1", 10));
 
   useEffect(() => {
     if (categoryParam && categories.includes(categoryParam)) {
@@ -34,8 +38,15 @@ const Projects = () => {
     }
   }, [categoryParam]);
 
+  useEffect(() => {
+    if (pageParam) {
+      setCurrentPage(parseInt(pageParam, 10));
+    }
+  }, [pageParam]);
+
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category);
+    setCurrentPage(1);
     if (category === "All") {
       setSearchParams({});
     } else {
@@ -46,6 +57,19 @@ const Projects = () => {
   const filteredProjects = activeCategory === "All" 
     ? projects 
     : projects.filter(p => p.category === activeCategory);
+
+  const totalPages = Math.ceil(filteredProjects.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedProjects = filteredProjects.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    const params: Record<string, string> = {};
+    if (activeCategory !== "All") params.category = activeCategory;
+    if (page > 1) params.page = page.toString();
+    setSearchParams(params);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <Layout>
@@ -84,7 +108,7 @@ const Projects = () => {
       <section className="section-padding">
         <div className="container-custom">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProjects.map((project, index) => (
+            {paginatedProjects.map((project, index) => (
               <div 
                 key={index}
                 className="group bg-card rounded-lg overflow-hidden shadow-card card-hover"
@@ -113,6 +137,40 @@ const Projects = () => {
           {filteredProjects.length === 0 && (
             <div className="text-center py-12">
               <p className="text-muted-foreground">No projects found in this category.</p>
+            </div>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-2 mt-12">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <Button
+                  key={page}
+                  variant={currentPage === page ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => handlePageChange(page)}
+                >
+                  {page}
+                </Button>
+              ))}
+              
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
             </div>
           )}
         </div>

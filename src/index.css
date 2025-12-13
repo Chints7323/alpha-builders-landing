@@ -231,7 +231,7 @@
   }
 
   .animate-marquee-seamless {
-    animation: marquee-seamless 15s linear infinite;
+    animation: marquee-seamless 9s linear infinite;
   }
 
   .animate-marquee-seamless:hover {
