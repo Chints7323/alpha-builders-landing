@@ -7,6 +7,7 @@ import projectLoft from "@/assets/project-loft.jpg";
 import projectBathroom from "@/assets/project-bathroom.jpg";
 import projectExtension from "@/assets/project-extension.jpg";
 import projectCommercial from "@/assets/project-commercial.jpg";
+import { CONTACT_INFO } from "@/lib/constants";
 
 const serviceData: Record<string, {
   title: string;
@@ -167,9 +168,9 @@ const ServiceDetail = () => {
                     <Link to="/contact">Request Quote</Link>
                   </Button>
                   <Button asChild variant="outline" className="w-full border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                    <a href="tel:+447123456789" className="gap-2">
+                    <a href={`tel:${CONTACT_INFO.phone}`} className="gap-2">
                       <Phone className="h-4 w-4" />
-                      Call 07123 456 789
+                      Call {CONTACT_INFO.phoneAlt}
                     </a>
                   </Button>
                 </div>
@@ -180,7 +181,7 @@ const ServiceDetail = () => {
                 <ul className="space-y-3 text-sm">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-primary mt-0.5" />
-                    <span>7+ years experience</span>
+                    <span>8+ years experience</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-primary mt-0.5" />

@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo-transparent.png";
+import { CONTACT_INFO } from "@/lib/constants";
 
 const navItems = [
   { name: "Home", path: "/" },
@@ -55,7 +56,7 @@ const Header = () => {
             {/* Right Actions */}
             <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
               <Button asChild variant="navOutline" size="sm">
-                <a href="tel:+447828131029" className="gap-2">
+                <a href={`tel:${CONTACT_INFO.phone}`} className="gap-2">
                   <Phone className="h-4 w-4" />
                   Call Now
                 </a>
@@ -79,7 +80,7 @@ const Header = () => {
           {isOpen && (
             <div className="lg:hidden border-t border-white/20 animate-fade-in">
               <nav className="flex flex-col py-4 px-6">
-                {/* Logo at top of mobile menu */}
+                {/* Logo at top of mobile menu - only logo shown here */}
                 <div className="flex justify-center mb-4 pb-4 border-b border-white/20">
                   <div className="bg-background rounded-lg p-1.5 border-[3px] border-primary">
                     <img 
@@ -105,7 +106,7 @@ const Header = () => {
                 ))}
                 <div className="flex flex-col gap-3 pt-4">
                   <Button asChild variant="navOutline">
-                    <a href="tel:+447828131029" className="gap-2">
+                    <a href={`tel:${CONTACT_INFO.phone}`} className="gap-2">
                       <Phone className="h-4 w-4" />
                       Call Now
                     </a>
