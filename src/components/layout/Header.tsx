@@ -42,7 +42,9 @@ const Header = () => {
             {/* Center Logo - extends beyond navbar */}
             <Link 
               to="/" 
-              className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex items-center justify-center transition-transform duration-300 hover:scale-105 z-10"
+              className={`absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex items-center justify-center transition-transform duration-300 hover:scale-105 z-10 ${
+                isOpen ? "opacity-0 pointer-events-none" : ""
+              }`}
             >
               <div className="bg-background rounded-lg p-0.5 shadow-elevated border-[3px] border-primary">
                 <img 
