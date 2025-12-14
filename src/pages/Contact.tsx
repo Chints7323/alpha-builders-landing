@@ -37,21 +37,41 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
 
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for your enquiry. We'll get back to you within 24 hours.",
-    });
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString(),
+      });
 
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      service: "",
-      postcode: "",
-      message: ""
-    });
+      if (response.ok) {
+        toast({
+          title: "Message Sent!",
+          description: "Thank you for your enquiry. We'll get back to you within 24 hours.",
+        });
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          service: "",
+          postcode: "",
+          message: ""
+        });
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again or call us directly.",
+        variant: "destructive",
+      });
+    }
+    
     setIsSubmitting(false);
   };
 
@@ -78,7 +98,8 @@ const Contact = () => {
               <div className="bg-card p-8 rounded-lg shadow-card border border-border">
                 <h2 className="text-2xl font-bold mb-6">Get a Free Quote</h2>
                 
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit} className="space-y-5">
+                  <input type="hidden" name="form-name" value="contact" />
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">Full Name *</Label>
@@ -191,8 +212,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-sm">Phone</h4>
-                      <a href="tel:+447123456789" className="text-foreground hover:text-primary">
-                        07123 456 789
+                      <a href="tel:+447828131029" className="text-foreground hover:text-primary">
+                        (+44) 07828131029
                       </a>
                     </div>
                   </div>
@@ -203,8 +224,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-sm">Email</h4>
-                      <a href="mailto:info@alphaglobalbuilders.co.uk" className="text-foreground hover:text-primary text-sm">
-                        info@alphaglobalbuilders.co.uk
+                      <a href="mailto:info@alphaglobalbuilders.uk" className="text-foreground hover:text-primary text-sm">
+                        info@alphaglobalbuilders.uk
                       </a>
                     </div>
                   </div>

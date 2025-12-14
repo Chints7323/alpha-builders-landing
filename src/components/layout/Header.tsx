@@ -43,11 +43,11 @@ const Header = () => {
               to="/" 
               className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex items-center justify-center transition-transform duration-300 hover:scale-105 z-10"
             >
-              <div className="bg-background rounded-lg p-1.5 shadow-elevated border-[3px] border-primary">
+              <div className="bg-background rounded-lg p-0.5 shadow-elevated border-[3px] border-primary">
                 <img 
                   src={logo} 
                   alt="Alpha Global Builders" 
-                  className="h-[68px] w-auto"
+                  className="h-[72px] w-auto"
                 />
               </div>
             </Link>
@@ -55,7 +55,7 @@ const Header = () => {
             {/* Right Actions */}
             <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
               <Button asChild variant="navOutline" size="sm">
-                <a href="tel:+447123456789" className="gap-2">
+                <a href="tel:+447828131029" className="gap-2">
                   <Phone className="h-4 w-4" />
                   Call Now
                 </a>
@@ -105,7 +105,7 @@ const Header = () => {
                 ))}
                 <div className="flex flex-col gap-3 pt-4">
                   <Button asChild variant="navOutline">
-                    <a href="tel:+447123456789" className="gap-2">
+                    <a href="tel:+447828131029" className="gap-2">
                       <Phone className="h-4 w-4" />
                       Call Now
                     </a>
