@@ -5,6 +5,7 @@ import {
   Home, Bath, Building2, Hammer, Fence, Zap, 
   ChevronRight, CheckCircle2, Phone
 } from "lucide-react";
+import { CONTACT_INFO } from "@/lib/constants";
 
 // Service images
 import residential1 from "@/assets/services/residential-1.jpg";
@@ -148,7 +149,7 @@ const Services = () => {
                       {/* Actions */}
                       <div className="flex flex-wrap items-center gap-3 ml-0 lg:ml-[4.5rem]">
                         <Button asChild variant="outline" size="sm">
-                          <a href="tel:+447123456789" className="gap-2">
+                          <a href={`tel:${CONTACT_INFO.phone}`} className="gap-2">
                             <Phone className="h-4 w-4" />
                             Call Us
                           </a>
@@ -226,7 +227,7 @@ const Services = () => {
               <Link to="/contact">Get a Quote</Link>
             </Button>
             <Button asChild variant="outline" size="xl" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-              <a href="tel:+447123456789" className="gap-2">
+              <a href={`tel:${CONTACT_INFO.phone}`} className="gap-2">
                 <Phone className="h-5 w-5" />
                 Call Now
               </a>

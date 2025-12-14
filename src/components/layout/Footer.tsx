@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
 import logo from "@/assets/logo-transparent.png";
+import { CONTACT_INFO } from "@/lib/constants";
 
 const Footer = () => {
   return (
@@ -73,21 +74,21 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <Phone className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                 <div>
-                  <a href="tel:+447828131029" className="hover:text-primary transition-colors">
-                    (+44) 07828131029
+                  <a href={`tel:${CONTACT_INFO.phone}`} className="hover:text-primary transition-colors">
+                    {CONTACT_INFO.phoneDisplay}
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                <a href="mailto:info@alphaglobalbuilders.uk" className="hover:text-primary transition-colors text-sm">
-                  info@alphaglobalbuilders.uk
+                <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-primary transition-colors text-sm">
+                  {CONTACT_INFO.email}
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                 <span className="text-accent-foreground/80 text-sm">
-                  Stanmore, London, United Kingdom
+                  {CONTACT_INFO.location}
                 </span>
               </li>
             </ul>

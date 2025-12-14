@@ -12,6 +12,7 @@ import heroImage from "@/assets/hero-construction.jpg";
 import kitchenImg from "@/assets/services/kitchen-3.jpg";
 import loftImg from "@/assets/services/loft-3.jpg";
 import residentialImg from "@/assets/services/residential-1.jpg";
+import { CONTACT_INFO } from "@/lib/constants";
 
 const testimonials = [
   { name: "Sarah M.", location: "Stanmore", project: "Kitchen Renovation", text: "Excellent work on our kitchen renovation. Professional team, clean and tidy. Highly recommend!", rating: 5 },
@@ -61,7 +62,7 @@ const Index = () => {
                 <Link to="/contact">Get a Quote</Link>
               </Button>
               <Button asChild variant="heroOutline" size="xl" className="border-accent-foreground text-accent-foreground hover:bg-accent-foreground hover:text-accent">
-                <a href="tel:+447123456789">
+                <a href={`tel:${CONTACT_INFO.phone}`}>
                   <Phone className="h-5 w-5" />
                   Call Now
                 </a>
@@ -278,9 +279,9 @@ const Index = () => {
               <Link to="/contact">Get a Free Quote</Link>
             </Button>
             <Button asChild variant="heroOutline" size="xl" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-              <a href="tel:+447123456789">
+              <a href={`tel:${CONTACT_INFO.phone}`}>
                 <Phone className="h-5 w-5" />
-                07123 456 789
+                {CONTACT_INFO.phoneAlt}
               </a>
             </Button>
           </div>
