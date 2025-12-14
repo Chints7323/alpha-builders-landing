@@ -127,40 +127,52 @@ const Contact = () => {
 
     setIsSubmitting(true);
 
+    const isNetlifyEnvironment =
+      typeof window !== "undefined" &&
+      (window.location.hostname === "alphaglobalbuilders.uk" ||
+        window.location.hostname.endsWith(".netlify.app"));
+
     try {
-      const formDataToSend = new URLSearchParams();
-      formDataToSend.append("form-name", "contact");
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("phone", formData.phone);
-      formDataToSend.append("service", formData.service);
-      formDataToSend.append("postcode", formData.postcode);
-      formDataToSend.append("message", formData.message);
+      if (isNetlifyEnvironment) {
+        const formDataToSend = new URLSearchParams();
+        formDataToSend.append("form-name", "contact");
+        formDataToSend.append("name", formData.name);
+        formDataToSend.append("email", formData.email);
+        formDataToSend.append("phone", formData.phone);
+        formDataToSend.append("service", formData.service);
+        formDataToSend.append("postcode", formData.postcode);
+        formDataToSend.append("message", formData.message);
 
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: formDataToSend.toString(),
-      });
-
-      if (response.ok) {
-        setIsSubmitted(true);
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          service: "",
-          postcode: "",
-          message: ""
+        const response = await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: formDataToSend.toString(),
         });
+
+        if (!response.ok) {
+          throw new Error("Form submission failed");
+        }
       } else {
-        throw new Error("Form submission failed");
+        // In preview/non-Netlify environments we skip the network request
+        console.warn("Skipping Netlify form POST in non-Netlify environment.");
       }
+
+      setIsSubmitted(true);
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        service: "",
+        postcode: "",
+        message: "",
+      });
+      setErrors({});
     } catch (error) {
+      console.error("Error submitting contact form", error);
       setErrors({ submit: "Something went wrong. Please try again or call us directly." });
+    } finally {
+      setIsSubmitting(false);
     }
-    
-    setIsSubmitting(false);
   };
 
   if (isSubmitted) {
@@ -234,7 +246,7 @@ const Contact = () => {
                   </div>
                 )}
                 
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="space-y-5">
                   <input type="hidden" name="form-name" value="contact" />
                   <input type="hidden" name="bot-field" />
                   

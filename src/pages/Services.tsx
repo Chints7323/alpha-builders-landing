@@ -173,6 +173,7 @@ const Services = () => {
                                 <img 
                                   src={service.images[imgIndex]} 
                                   alt={`${service.title} project ${imgIndex + 1}`}
+                                  loading="lazy"
                                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 />
                               ) : (
