@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { 
   Home, Bath, Building2, Hammer, Fence, Zap, 
@@ -91,7 +92,13 @@ const truncateText = (text: string, maxLength: number) => {
 
 const Services = () => {
   return (
-    <Layout>
+    <>
+      <SEO
+        title="Our Services | Alpha Global Builders - Construction Services North West London"
+        description="Explore our comprehensive construction services: residential renovations, kitchens, bathrooms, loft conversions, commercial fit-outs & more in North West London."
+        canonicalUrl="/services"
+      />
+      <Layout>
       {/* Hero */}
       <section className="bg-accent text-accent-foreground pt-32 pb-16">
         <div className="container-custom">
@@ -237,6 +244,7 @@ const Services = () => {
         </div>
       </section>
     </Layout>
+    </>
   );
 };
 

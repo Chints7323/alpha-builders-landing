@@ -1,4 +1,5 @@
 import Layout from "@/components/layout/Layout";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Star, Quote } from "lucide-react";
@@ -79,7 +80,13 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <Layout>
+    <>
+      <SEO
+        title="Client Testimonials | Alpha Global Builders - Customer Reviews"
+        description="Read reviews from our satisfied customers across North West London. 500+ completed projects with 5-star ratings for quality construction work."
+        canonicalUrl="/testimonials"
+      />
+      <Layout>
       {/* Hero */}
       <section className="bg-accent text-accent-foreground section-padding">
         <div className="container-custom">
@@ -172,6 +179,7 @@ const Testimonials = () => {
         </div>
       </section>
     </Layout>
+    </>
   );
 };
 

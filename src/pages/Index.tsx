@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/layout/Layout";
+import SEO from "@/components/SEO";
+import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 import ServicesMarquee from "@/components/ServicesMarquee";
 import ScrollScale from "@/components/ScrollScale";
 import TestimonialSlider from "@/components/TestimonialSlider";
@@ -32,6 +34,13 @@ const serviceItems = [
 
 const Index = () => {
   return (
+    <>
+      <SEO
+        title="Alpha Global Builders | Trusted Construction in North West London"
+        description="Alpha Global Builders - Trusted, high quality construction services in Stanmore and North West London. 8+ years experience. Extensions, loft conversions, kitchens, bathrooms & more."
+        canonicalUrl="/"
+      />
+      <LocalBusinessSchema />
     <Layout>
       {/* Hero Section - starts from top, navbar floats inside */}
       <section className="relative min-h-screen flex items-center pt-32">
@@ -288,6 +297,7 @@ const Index = () => {
         </div>
       </section>
     </Layout>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Layout from "@/components/layout/Layout";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -177,7 +178,13 @@ const Contact = () => {
 
   if (isSubmitted) {
     return (
-      <Layout>
+      <>
+        <SEO
+          title="Contact Us | Alpha Global Builders - Get a Free Quote"
+          description="Contact Alpha Global Builders for a free quote. Call us or fill in our enquiry form. Serving Stanmore, Harrow, Edgware, Wembley and North West London."
+          canonicalUrl="/contact"
+        />
+        <Layout>
         <section className="bg-accent text-accent-foreground pt-32 pb-16">
           <div className="container-custom">
             <div className="max-w-3xl">
@@ -214,11 +221,18 @@ const Contact = () => {
           </div>
         </section>
       </Layout>
+      </>
     );
   }
 
   return (
-    <Layout>
+    <>
+      <SEO
+        title="Contact Us | Alpha Global Builders - Get a Free Quote"
+        description="Contact Alpha Global Builders for a free quote. Call us or fill in our enquiry form. Serving Stanmore, Harrow, Edgware, Wembley and North West London."
+        canonicalUrl="/contact"
+      />
+      <Layout>
       {/* Hero Section */}
       <section className="bg-accent text-accent-foreground pt-32 pb-16">
         <div className="container-custom">
@@ -428,6 +442,7 @@ const Contact = () => {
         </div>
       </section>
     </Layout>
+    </>
   );
 };
 

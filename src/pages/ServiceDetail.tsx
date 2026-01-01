@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Phone, ChevronRight, CheckCircle2, ArrowLeft } from "lucide-react";
 import projectKitchen from "@/assets/project-kitchen.jpg";
@@ -73,21 +74,35 @@ const ServiceDetail = () => {
 
   if (!service) {
     return (
-      <Layout>
-        <section className="section-padding">
-          <div className="container-custom text-center">
-            <h1 className="text-3xl font-bold mb-4">Service Not Found</h1>
-            <Button asChild>
-              <Link to="/services">Back to Services</Link>
-            </Button>
-          </div>
-        </section>
-      </Layout>
+      <>
+        <SEO
+          title="Service Not Found | Alpha Global Builders"
+          description="The requested service page was not found. Browse our construction services in North West London."
+          canonicalUrl="/services"
+          noindex
+        />
+        <Layout>
+          <section className="section-padding">
+            <div className="container-custom text-center">
+              <h1 className="text-3xl font-bold mb-4">Service Not Found</h1>
+              <Button asChild>
+                <Link to="/services">Back to Services</Link>
+              </Button>
+            </div>
+          </section>
+        </Layout>
+      </>
     );
   }
 
   return (
-    <Layout>
+    <>
+      <SEO
+        title={`${service.title} | Alpha Global Builders - North West London`}
+        description={service.description + " Quality construction services in Stanmore, Harrow, Edgware and North West London."}
+        canonicalUrl={`/services/${slug}`}
+      />
+      <Layout>
       {/* Hero */}
       <section className="bg-accent text-accent-foreground section-padding">
         <div className="container-custom">
@@ -202,6 +217,7 @@ const ServiceDetail = () => {
         </div>
       </section>
     </Layout>
+    </>
   );
 };
 
