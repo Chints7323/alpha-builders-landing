@@ -1,9 +1,17 @@
 import Layout from "@/components/layout/Layout";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Shield, Heart, Eye, Users, Award, Clock, Target, Sparkles } from "lucide-react";
 
 const About = () => {
+  return (
+    <>
+      <SEO
+        title="About Us | Alpha Global Builders - Trusted Builders in North West London"
+        description="Learn about Alpha Global Builders - 8+ years of trusted construction experience in North West London. Our story, values, and commitment to quality craftsmanship."
+        canonicalUrl="/about"
+      />
   return (
     <Layout>
       {/* Hero */}
@@ -201,6 +209,7 @@ const About = () => {
         </div>
       </section>
     </Layout>
+    </>
   );
 };
 

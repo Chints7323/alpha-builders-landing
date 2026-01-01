@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { MapPin, ChevronLeft, ChevronRight } from "lucide-react";
@@ -72,7 +73,13 @@ const Projects = () => {
   };
 
   return (
-    <Layout>
+    <>
+      <SEO
+        title="Our Projects | Alpha Global Builders - Project Portfolio North West London"
+        description="Browse our portfolio of completed construction projects across North West London. Kitchens, bathrooms, extensions, loft conversions & commercial fit-outs."
+        canonicalUrl="/projects"
+      />
+      <Layout>
       {/* Hero */}
       <section className="bg-accent text-accent-foreground pt-32 pb-16">
         <div className="container-custom">
@@ -192,6 +199,7 @@ const Projects = () => {
         </div>
       </section>
     </Layout>
+    </>
   );
 };
 
