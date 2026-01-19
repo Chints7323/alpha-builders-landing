@@ -10,18 +10,21 @@ display_url: https://alphaglobalbuilders.uk
 logo_url: https://alphaglobalbuilders.uk/favicon.png
 
 collections:
-  - name: "testimonials"
-    label: "Testimonials"
-    file: "public/content/testimonials.json"
-    fields:
+  - name: "settings"
+    label: "Settings"
+    files:
       - label: "Testimonials"
         name: "testimonials"
-        widget: "list"
-        summary: "{{fields.name}} - {{fields.project}}"
+        file: "public/content/testimonials.json"
         fields:
-          - { label: "Name", name: "name", widget: "string" }
-          - { label: "Location", name: "location", widget: "string" }
-          - { label: "Project Type", name: "project", widget: "string" }
-          - { label: "Review Text", name: "text", widget: "text" }
-          - { label: "Rating (1-5)", name: "rating", widget: "number", min: 1, max: 5, default: 5 }
-          - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: false, required: false }
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "list"
+            summary: "{{fields.name}} - {{fields.project}}"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Project Type", name: "project", widget: "string" }
+              - { label: "Review Text", name: "text", widget: "text" }
+              - { label: "Rating (1-5)", name: "rating", widget: "number", min: 1, max: 5, default: 5 }
+              - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: false, required: false }
