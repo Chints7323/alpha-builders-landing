@@ -140,11 +140,11 @@
 
   .nav-link-hover::before {
     content: '';
-    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary transform -translate-x-full transition-transform duration-300 ease-out;
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary origin-left scale-x-0 transition-transform duration-300 ease-out;
   }
 
   .nav-link-hover:hover::before {
-    @apply translate-x-0;
+    @apply scale-x-100;
   }
 
   /* Button fill hover animation */

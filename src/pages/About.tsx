@@ -12,7 +12,6 @@ const About = () => {
         description="Learn about Alpha Global Builders - 8+ years of trusted construction experience in North West London. Our story, values, and commitment to quality craftsmanship."
         canonicalUrl="/about"
       />
-  return (
     <Layout>
       {/* Hero */}
       <section className="bg-accent text-accent-foreground pt-32 pb-16">

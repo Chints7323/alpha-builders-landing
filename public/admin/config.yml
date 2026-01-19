@@ -1,0 +1,27 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images/projects"
+public_folder: "/images/projects"
+
+site_url: https://alphaglobalbuilders.uk
+display_url: https://alphaglobalbuilders.uk
+logo_url: https://alphaglobalbuilders.uk/favicon.png
+
+collections:
+  - name: "testimonials"
+    label: "Testimonials"
+    file: "public/content/testimonials.json"
+    fields:
+      - label: "Testimonials"
+        name: "testimonials"
+        widget: "list"
+        summary: "{{fields.name}} - {{fields.project}}"
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Location", name: "location", widget: "string" }
+          - { label: "Project Type", name: "project", widget: "string" }
+          - { label: "Review Text", name: "text", widget: "text" }
+          - { label: "Rating (1-5)", name: "rating", widget: "number", min: 1, max: 5, default: 5 }
+          - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: false, required: false }
