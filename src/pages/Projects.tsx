@@ -1,28 +1,10 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { MapPin, ChevronLeft, ChevronRight } from "lucide-react";
-import kitchenImg from "@/assets/services/kitchen-3.jpg";
-import loftImg from "@/assets/services/loft-3.jpg";
-import bathroomImg from "@/assets/services/bathroom-3.jpg";
-import residentialImg from "@/assets/services/residential-1.jpg";
-import commercialImg from "@/assets/services/commercial-1.jpg";
-
-const categories = ["All", "Residential", "Kitchens", "Bathrooms", "Commercial", "Extensions"];
-
-const projects = [
-  { image: kitchenImg, title: "Modern Kitchen Renovation", category: "Kitchens", location: "Stanmore", description: "Complete kitchen redesign with custom cabinetry and worktops" },
-  { image: loftImg, title: "Loft Conversion Master Suite", category: "Residential", location: "Harrow", description: "Spacious loft conversion with skylights and en-suite bathroom" },
-  { image: bathroomImg, title: "Contemporary Bathroom", category: "Bathrooms", location: "Edgware", description: "Modern walk-in shower room with chrome fixtures" },
-  { image: residentialImg, title: "Rear House Extension", category: "Extensions", location: "Wembley", description: "Open-plan living extension with bi-fold doors" },
-  { image: commercialImg, title: "Office Fit-out", category: "Commercial", location: "Stanmore", description: "Modern open-plan office space with glass partitions" },
-  { image: kitchenImg, title: "Shaker Style Kitchen", category: "Kitchens", location: "Pinner", description: "Traditional shaker kitchen with island and pendant lighting" },
-  { image: residentialImg, title: "Side Return Extension", category: "Extensions", location: "Northwood", description: "Kitchen extension maximising natural light" },
-  { image: bathroomImg, title: "Family Bathroom Renovation", category: "Bathrooms", location: "Barnet", description: "Family bathroom with freestanding bath and heated floors" },
-];
+import { projects, categories } from "@/lib/projects-data";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -115,14 +97,15 @@ const Projects = () => {
       <section className="section-padding">
         <div className="container-custom">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {paginatedProjects.map((project, index) => (
-              <div 
-                key={index}
-                className="group bg-card rounded-lg overflow-hidden shadow-card card-hover"
+            {paginatedProjects.map((project) => (
+              <Link 
+                key={project.id}
+                to={`/projects/${project.id}`}
+                className="group bg-card rounded-lg overflow-hidden shadow-card card-hover block"
               >
                 <div className="relative overflow-hidden">
                   <img 
-                    src={project.image} 
+                    src={project.images[0]} 
                     alt={project.title}
                     loading="lazy"
                     className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500"
@@ -130,15 +113,21 @@ const Projects = () => {
                   <span className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
                     {project.category}
                   </span>
+                  {/* Image count indicator */}
+                  <span className="absolute bottom-4 right-4 bg-background/80 text-foreground px-2 py-1 rounded text-xs font-medium">
+                    {project.images.length} photos
+                  </span>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-bold mb-2">{project.title}</h3>
+                  <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
                   <p className="text-muted-foreground text-sm mb-3">{project.description}</p>
                   <p className="text-muted-foreground text-sm flex items-center gap-1">
                     <MapPin className="h-3 w-3" /> {project.location}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
