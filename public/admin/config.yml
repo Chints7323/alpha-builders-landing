@@ -11,7 +11,7 @@ logo_url: https://alphaglobalbuilders.uk/favicon.png
 
 collections:
   - name: "settings"
-    label: "Settings"
+    label: "Site Content"
     files:
       - label: "Testimonials"
         name: "testimonials"
@@ -28,3 +28,24 @@ collections:
               - { label: "Review Text", name: "text", widget: "text" }
               - { label: "Rating (1-5)", name: "rating", widget: "number", min: 1, max: 5, default: 5 }
               - { label: "Featured on Homepage", name: "featured", widget: "boolean", default: false, required: false }
+
+      - label: "Projects"
+        name: "projects"
+        file: "public/content/projects.json"
+        fields:
+          - label: "Projects"
+            name: "projects"
+            widget: "list"
+            summary: "{{fields.title}} - {{fields.location}}"
+            fields:
+              - { label: "Project ID (URL slug)", name: "id", widget: "string", hint: "e.g. modern-kitchen-stanmore (lowercase, dashes, no spaces)" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Category", name: "category", widget: "select", options: ["Residential", "Kitchens", "Bathrooms", "Commercial", "Extensions"] }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Short Description", name: "description", widget: "string" }
+              - { label: "Full Description", name: "fullDescription", widget: "text" }
+              - { label: "Completed Date", name: "completedDate", widget: "string", hint: "e.g. March 2024" }
+              - label: "Images"
+                name: "images"
+                widget: "list"
+                field: { label: "Image", name: "image", widget: "image" }
