@@ -1,202 +1,141 @@
+import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, MapPin, Calendar, ArrowLeft } from "lucide-react";
-import { getProjectById, getRelatedProjects, Project } from "@/lib/projects-data";
+import { ChevronLeft, MapPin, Calendar, ChevronRight } from "lucide-react";
+import { loadProjects, getProjectById, getRelatedProjects, Project } from "@/lib/projects-data";
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [project, setProject] = useState<Project | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [project, setProject] = useState<Project | undefined>(undefined);
+  const [relatedProjects, setRelatedProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (id) {
-      const foundProject = getProjectById(id);
-      if (foundProject) {
-        setProject(foundProject);
-        setCurrentImageIndex(0);
-      } else {
-        navigate("/projects");
+    loadProjects().then(() => {
+      const found = getProjectById(id || "");
+      setProject(found);
+      if (found) {
+        setRelatedProjects(getRelatedProjects(found.id, found.category));
       }
-    }
-  }, [id, navigate]);
+      setLoading(false);
+    });
+  }, [id]);
 
-  if (!project) {
-    return null;
+  if (loading) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <p className="text-muted-foreground">Loading project...</p>
+        </div>
+      </Layout>
+    );
   }
 
-  const relatedProjects = getRelatedProjects(project.id, project.category);
-
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => 
-      prev === project.images.length - 1 ? 0 : prev + 1
+  if (!project) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-4">Project Not Found</h1>
+            <Button asChild>
+              <Link to="/projects">View All Projects</Link>
+            </Button>
+          </div>
+        </div>
+      </Layout>
     );
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => 
-      prev === 0 ? project.images.length - 1 : prev - 1
-    );
-  };
-
-  // Touch handlers for swipe
-  const minSwipeDistance = 50;
-
-  const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-    
-    if (isLeftSwipe) {
-      nextImage();
-    } else if (isRightSwipe) {
-      prevImage();
-    }
-  };
+  }
 
   return (
     <>
       <SEO
-        title={`${project.title} | Alpha Global Builders Projects`}
+        title={`${project.title} | Alpha Global Builders Project`}
         description={project.description}
         canonicalUrl={`/projects/${project.id}`}
       />
       <Layout>
         {/* Back Button */}
-        <section className="pt-24 pb-4 bg-background">
+        <section className="bg-accent text-accent-foreground pt-28 pb-4">
           <div className="container-custom">
             <Button 
               variant="ghost" 
-              asChild
-              className="gap-2 text-muted-foreground hover:text-foreground"
+              className="text-accent-foreground hover:text-primary -ml-4"
+              onClick={() => navigate(-1)}
             >
-              <Link to="/projects">
-                <ArrowLeft className="h-4 w-4" />
-                Back to Projects
-              </Link>
+              <ChevronLeft className="h-4 w-4 mr-1" />
+              Back to Projects
             </Button>
           </div>
         </section>
 
         {/* Project Header */}
-        <section className="pb-8 bg-background">
+        <section className="bg-accent text-accent-foreground pb-12">
           <div className="container-custom">
-            <div className="max-w-4xl">
-              <span className="inline-block bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium mb-4">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
                 {project.category}
               </span>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                {project.title}
-              </h1>
-              <div className="flex flex-wrap gap-4 text-muted-foreground">
-                <span className="flex items-center gap-1">
-                  <MapPin className="h-4 w-4" />
-                  {project.location}
+              <span className="flex items-center gap-1 text-accent-foreground/80 text-sm">
+                <MapPin className="h-4 w-4" /> {project.location}
+              </span>
+              {project.completedDate && (
+                <span className="flex items-center gap-1 text-accent-foreground/80 text-sm">
+                  <Calendar className="h-4 w-4" /> {project.completedDate}
                 </span>
-                {project.completedDate && (
-                  <span className="flex items-center gap-1">
-                    <Calendar className="h-4 w-4" />
-                    {project.completedDate}
-                  </span>
-                )}
-              </div>
+              )}
             </div>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">{project.title}</h1>
           </div>
         </section>
 
-        {/* Image Carousel */}
-        <section className="pb-12 bg-background">
+        {/* Image Gallery */}
+        <section className="section-padding">
           <div className="container-custom">
-            <div className="relative max-w-5xl mx-auto">
+            <div className="grid lg:grid-cols-[1fr_200px] gap-6">
               {/* Main Image */}
-              <div 
-                className="relative aspect-[16/10] overflow-hidden rounded-lg bg-muted"
-                onTouchStart={onTouchStart}
-                onTouchMove={onTouchMove}
-                onTouchEnd={onTouchEnd}
-              >
-                <img
-                  src={project.images[currentImageIndex]}
-                  alt={`${project.title} - Image ${currentImageIndex + 1}`}
+              <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-secondary">
+                <img 
+                  src={project.images[selectedImage]} 
+                  alt={`${project.title} - Image ${selectedImage + 1}`}
                   className="w-full h-full object-cover"
                 />
-                
-                {/* Navigation Arrows - Desktop */}
-                {project.images.length > 1 && (
-                  <>
-                    <button
-                      onClick={prevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background text-foreground p-2 rounded-full shadow-lg transition-all hidden md:flex items-center justify-center"
-                      aria-label="Previous image"
-                    >
-                      <ChevronLeft className="h-6 w-6" />
-                    </button>
-                    <button
-                      onClick={nextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background text-foreground p-2 rounded-full shadow-lg transition-all hidden md:flex items-center justify-center"
-                      aria-label="Next image"
-                    >
-                      <ChevronRight className="h-6 w-6" />
-                    </button>
-                  </>
-                )}
-
-                {/* Image Counter */}
-                <div className="absolute bottom-4 right-4 bg-background/80 text-foreground px-3 py-1 rounded-full text-sm font-medium">
-                  {currentImageIndex + 1} / {project.images.length}
+                <div className="absolute bottom-4 right-4 bg-background/80 text-foreground px-3 py-1 rounded text-sm">
+                  {selectedImage + 1} / {project.images.length}
                 </div>
               </div>
 
-              {/* Thumbnail Strip */}
-              {project.images.length > 1 && (
-                <div className="flex gap-2 mt-4 justify-center">
-                  {project.images.map((image, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`relative w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                        index === currentImageIndex 
-                          ? "border-primary ring-2 ring-primary/20" 
-                          : "border-transparent opacity-60 hover:opacity-100"
-                      }`}
-                    >
-                      <img
-                        src={image}
-                        alt={`Thumbnail ${index + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {/* Swipe hint for mobile */}
-              <p className="text-center text-muted-foreground text-sm mt-4 md:hidden">
-                Swipe to see more photos
-              </p>
+              {/* Thumbnails */}
+              <div className="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto">
+                {project.images.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImage(index)}
+                    className={`flex-shrink-0 w-24 h-24 lg:w-full lg:h-32 rounded-lg overflow-hidden border-2 transition-all ${
+                      selectedImage === index 
+                        ? "border-primary" 
+                        : "border-transparent hover:border-primary/50"
+                    }`}
+                  >
+                    <img 
+                      src={image} 
+                      alt={`Thumbnail ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* Project Description */}
-        <section className="pb-16 bg-background">
+        <section className="pb-16">
           <div className="container-custom">
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-3xl">
               <h2 className="text-2xl font-bold mb-4">About This Project</h2>
               <p className="text-muted-foreground leading-relaxed text-lg">
                 {project.fullDescription}
@@ -207,19 +146,27 @@ const ProjectDetail = () => {
 
         {/* Related Projects */}
         {relatedProjects.length > 0 && (
-          <section className="py-16 bg-secondary">
+          <section className="section-padding bg-secondary">
             <div className="container-custom">
-              <h2 className="text-2xl font-bold mb-8">More {project.category} Projects</h2>
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold">Related Projects</h2>
+                <Button asChild variant="outline">
+                  <Link to={`/projects?category=${project.category}`}>
+                    View All {project.category}
+                    <ChevronRight className="h-4 w-4 ml-1" />
+                  </Link>
+                </Button>
+              </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {relatedProjects.map((related) => (
                   <Link 
                     key={related.id}
                     to={`/projects/${related.id}`}
-                    className="group bg-card rounded-lg overflow-hidden shadow-card card-hover"
+                    className="group bg-card rounded-lg overflow-hidden shadow-card card-hover block"
                   >
                     <div className="relative overflow-hidden">
-                      <img
-                        src={related.images[0]}
+                      <img 
+                        src={related.images[0]} 
                         alt={related.title}
                         className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500"
                       />
@@ -240,16 +187,16 @@ const ProjectDetail = () => {
         )}
 
         {/* CTA */}
-        <section className="section-padding bg-accent text-accent-foreground">
+        <section className="section-padding bg-primary">
           <div className="container-custom text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Start Your Project?
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+              Want Similar Results?
             </h2>
-            <p className="text-accent-foreground/80 mb-8 max-w-2xl mx-auto">
-              Let's discuss your ideas and create something amazing together.
+            <p className="text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
+              Let's discuss your project and bring your vision to life.
             </p>
-            <Button asChild size="xl" variant="secondary">
-              <Link to="/contact">Get a Free Quote</Link>
+            <Button asChild variant="secondary" size="xl">
+              <Link to="/contact">Get Your Free Quote</Link>
             </Button>
           </div>
         </section>
