@@ -1,6 +1,21 @@
 {
   "projects": [
     {
+      "id": "bathroom-renovation-stanmore",
+      "title": "Full Bathroom Renovation",
+      "category": "Bathrooms",
+      "location": "Stanmore",
+      "description": "Complete bathroom transformation with walk-in shower, 3D feature tiles, and ambient LED lighting.",
+      "fullDescription": "A dated bathroom converted into a modern, spa-inspired space. We removed the old bathtub and installed a spacious frameless glass walk-in shower with 3D wave pattern feature tiles. The room features vertical blue LED ambient lighting, a wall-hung toilet with concealed cistern, and a floating vanity unit. Finished with a chrome heated towel rail, recessed spotlights, and dark gray floor tiles throughout.",
+      "completedDate": "Jan 2023",
+      "images": [
+        "/images/projects/bathroom_before_after_2_hq.png",
+        "/images/projects/20260105_160553.jpg",
+        "/images/projects/bathroom_before_after_hq.png",
+        "/images/projects/20260105_160558.jpg"
+      ]
+    },
+    {
       "fullDescription": "This family bathroom was completely renovated to create a relaxing retreat. A freestanding bath takes centre stage, complemented by a separate walk-in shower. We installed underfloor heating throughout, along with a heated towel rail. The neutral palette and natural stone tiles create a spa-like atmosphere.",
       "index": 8,
       "location": "Barnet",
