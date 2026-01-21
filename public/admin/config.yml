@@ -22,7 +22,6 @@ collections:
             widget: "list"
             summary: "{{fields.name}} - {{fields.project}}"
             fields:
-              - { label: "Display Order (1 = first)", name: "index", widget: "number", min: 1, default: 99 }
               - { label: "Name", name: "name", widget: "string" }
               - { label: "Location", name: "location", widget: "string" }
               - { label: "Project Type", name: "project", widget: "string" }
@@ -39,7 +38,6 @@ collections:
             widget: "list"
             summary: "{{fields.index}}. {{fields.title}} - {{fields.location}}"
             fields:
-              - { label: "Display Order (1 = first)", name: "index", widget: "number", min: 1, default: 99 }
               - { label: "Project ID (URL slug)", name: "id", widget: "string", hint: "e.g. modern-kitchen-stanmore (lowercase, dashes, no spaces)" }
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Category", name: "category", widget: "select", options: ["Residential", "Kitchens", "Bathrooms", "Commercial", "Extensions"] }
