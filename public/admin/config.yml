@@ -36,7 +36,7 @@ collections:
           - label: "Projects"
             name: "projects"
             widget: "list"
-            summary: "{{fields.index}}. {{fields.title}} - {{fields.location}}"
+            summary: "{{fields.title}} - {{fields.location}}"
             fields:
               - { label: "Project ID (URL slug)", name: "id", widget: "string", hint: "e.g. modern-kitchen-stanmore (lowercase, dashes, no spaces)" }
               - { label: "Title", name: "title", widget: "string" }
