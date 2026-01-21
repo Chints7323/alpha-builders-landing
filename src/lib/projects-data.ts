@@ -47,7 +47,7 @@ export async function loadProjects(): Promise<Project[]> {
     const response = await fetch('/content/projects.json');
     if (!response.ok) throw new Error('Failed to fetch');
     const data = await response.json();
-    projectsCache = (data.projects || []).sort((a: Project, b: Project) => (a.index || 99) - (b.index || 99));
+    projectsCache = data.projects || [];
     return projectsCache;
   } catch (error) {
     console.warn('Loading fallback projects');
@@ -92,7 +92,7 @@ export async function loadTestimonials(): Promise<Testimonial[]> {
     const response = await fetch('/content/testimonials.json');
     if (!response.ok) throw new Error('Failed to fetch');
     const data = await response.json();
-    testimonialsCache = (data.testimonials || []).sort((a: Testimonial, b: Testimonial) => (a.index || 99) - (b.index || 99));
+    testimonialsCache = data.testimonials || [];
     return testimonialsCache;
   } catch (error) {
     console.warn('Loading fallback testimonials');
