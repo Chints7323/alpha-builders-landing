@@ -1,6 +1,7 @@
 {
   "testimonials": [
     {
+      "index": 1,
       "name": "Sarah Mitchell",
       "location": "Stanmore",
       "project": "Kitchen Renovation",
@@ -9,6 +10,7 @@
       "featured": true
     },
     {
+      "index": 2,
       "name": "David Richardson",
       "location": "Harrow",
       "project": "Loft Conversion",
@@ -17,6 +19,7 @@
       "featured": true
     },
     {
+      "index": 3,
       "name": "Emma Thompson",
       "location": "Wembley",
       "project": "House Extension",
@@ -25,6 +28,7 @@
       "featured": true
     },
     {
+      "index": 4,
       "name": "James Patterson",
       "location": "Edgware",
       "project": "Bathroom Renovation",
@@ -33,6 +37,7 @@
       "featured": true
     },
     {
+      "index": 5,
       "name": "Lisa Chen",
       "location": "Pinner",
       "project": "Full House Renovation",
@@ -41,6 +46,7 @@
       "featured": false
     },
     {
+      "index": 6,
       "name": "Michael O'Brien",
       "location": "Northwood",
       "project": "Commercial Fit-out",
@@ -49,6 +55,7 @@
       "featured": false
     },
     {
+      "index": 7,
       "name": "Amanda Hughes",
       "location": "Bushey",
       "project": "Rear Extension",
@@ -57,6 +64,7 @@
       "featured": false
     },
     {
+      "index": 8,
       "name": "Robert Singh",
       "location": "Barnet",
       "project": "Driveway & Landscaping",
@@ -65,6 +73,7 @@
       "featured": false
     },
     {
+      "index": 9,
       "name": "Catherine Williams",
       "location": "Stanmore",
       "project": "Kitchen Extension",
@@ -73,6 +82,7 @@
       "featured": false
     },
     {
+      "index": 10,
       "name": "Tom Baker",
       "location": "Harrow",
       "project": "Electrical Upgrade",

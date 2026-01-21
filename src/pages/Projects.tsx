@@ -3,8 +3,9 @@ import { useSearchParams, Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
-import { MapPin, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { categories, loadProjects, Project } from "@/lib/projects-data";
+import ProjectCard from "@/components/ProjectCard";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -113,35 +114,12 @@ const Projects = () => {
             <>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {paginatedProjects.map((project) => (
-                  <Link 
-                    key={project.id}
-                    to={`/projects/${project.id}`}
-                    className="group bg-card rounded-lg overflow-hidden shadow-card card-hover block"
-                  >
-                    <div className="relative overflow-hidden">
-                      <img 
-                        src={project.images[0]} 
-                        alt={project.title}
-                        loading="lazy"
-                        className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <span className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
-                        {project.category}
-                      </span>
-                      <span className="absolute bottom-4 right-4 bg-background/80 text-foreground px-2 py-1 rounded text-xs font-medium">
-                        {project.images.length} photos
-                      </span>
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm mb-3">{project.description}</p>
-                      <p className="text-muted-foreground text-sm flex items-center gap-1">
-                        <MapPin className="h-3 w-3" /> {project.location}
-                      </p>
-                    </div>
-                  </Link>
+                  <ProjectCard 
+                    key={project.id} 
+                    project={project} 
+                    autoChangeImages={true}
+                    changeInterval={2500}
+                  />
                 ))}
               </div>
 

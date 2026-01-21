@@ -1,5 +1,5 @@
-# Serve admin folder directly (for Decap CMS)
-/admin/*  /admin/:splat  200
+# Serve admin folder directly (Decap CMS)
+/admin/*  /admin/index.html  200
 
 # Everything else goes to React SPA
-/*        /index.html    200
+/*        /index.html        200

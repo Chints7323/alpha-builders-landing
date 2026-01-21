@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/layout/Layout";
@@ -6,22 +7,14 @@ import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 import ServicesMarquee from "@/components/ServicesMarquee";
 import ScrollScale from "@/components/ScrollScale";
 import TestimonialSlider from "@/components/TestimonialSlider";
+import ProjectsSlider from "@/components/ProjectsSlider";
 import { 
   Phone, Shield, Award, Clock, Home, Building2, 
-  ChevronRight, MapPin, Bath, Hammer, Fence, Zap
+  ChevronRight, Bath, Hammer, Fence, Zap
 } from "lucide-react";
 import heroImage from "@/assets/hero-construction.jpg";
-import kitchenImg from "@/assets/services/kitchen-3.jpg";
-import loftImg from "@/assets/services/loft-3.jpg";
-import residentialImg from "@/assets/services/residential-1.jpg";
 import { CONTACT_INFO } from "@/lib/constants";
-
-const testimonials = [
-  { name: "Sarah M.", location: "Stanmore", project: "Kitchen Renovation", text: "Excellent work on our kitchen renovation. Professional team, clean and tidy. Highly recommend!", rating: 5 },
-  { name: "David R.", location: "Harrow", project: "Loft Conversion", text: "Alpha Global completed our loft conversion on time and budget. Outstanding quality throughout.", rating: 5 },
-  { name: "Emma T.", location: "Wembley", project: "Extension", text: "Fantastic experience from start to finish. They explained every step clearly. Very happy with our extension.", rating: 5 },
-  { name: "James K.", location: "Edgware", project: "Bathroom", text: "Beautiful bathroom renovation. The team was professional and the finish is perfect.", rating: 5 },
-];
+import { loadTestimonials, getFeaturedTestimonials, Testimonial } from "@/lib/projects-data";
 
 const serviceItems = [
   { icon: Home, title: "Residential Construction", desc: "Extensions, loft conversions, renovations", slug: "residential" },
@@ -33,6 +26,23 @@ const serviceItems = [
 ];
 
 const Index = () => {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+
+  useEffect(() => {
+    loadTestimonials().then(() => {
+      setTestimonials(getFeaturedTestimonials());
+    });
+  }, []);
+
+  // Convert to format expected by TestimonialSlider
+  const testimonialData = testimonials.map(t => ({
+    name: t.name,
+    location: t.location,
+    project: t.project,
+    text: t.text,
+    rating: t.rating
+  }));
+
   return (
     <>
       <SEO
@@ -162,7 +172,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Projects */}
+      {/* Featured Projects - Now with ProjectsSlider */}
       <section className="section-padding bg-secondary">
         <div className="container-custom">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
@@ -178,32 +188,7 @@ const Index = () => {
             </Button>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { image: kitchenImg, title: "Modern Kitchen Renovation", location: "Stanmore" },
-              { image: loftImg, title: "Loft Conversion", location: "Harrow" },
-              { image: residentialImg, title: "Rear Extension", location: "Edgware" },
-            ].map((project, index) => (
-              <Link 
-                key={index}
-                to="/projects"
-                className="group relative overflow-hidden rounded-lg card-hover"
-              >
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-accent/90 via-accent/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-accent-foreground">
-                  <h3 className="text-lg font-bold mb-1">{project.title}</h3>
-                  <p className="text-accent-foreground/80 text-sm flex items-center gap-1">
-                    <MapPin className="h-3 w-3" /> {project.location}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <ProjectsSlider />
         </div>
       </section>
 
@@ -217,7 +202,9 @@ const Index = () => {
             </p>
           </div>
 
-          <TestimonialSlider testimonials={testimonials} />
+          {testimonialData.length > 0 && (
+            <TestimonialSlider testimonials={testimonialData} />
+          )}
 
           <div className="text-center mt-8">
             <Button asChild variant="outline">
