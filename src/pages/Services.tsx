@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import SEO from "@/components/SEO";
@@ -7,26 +8,7 @@ import {
   ChevronRight, CheckCircle2, Phone
 } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/constants";
-
-// Service images
-import residential1 from "@/assets/services/residential-1.jpg";
-import residential2 from "@/assets/services/residential-2.jpg";
-import residential3 from "@/assets/services/residential-3.jpg";
-import kitchen1 from "@/assets/services/kitchen-1.jpg";
-import kitchen2 from "@/assets/services/kitchen-2.jpg";
-import kitchen3 from "@/assets/services/kitchen-3.jpg";
-import bathroom1 from "@/assets/services/bathroom-1.jpg";
-import bathroom2 from "@/assets/services/bathroom-2.jpg";
-import bathroom3 from "@/assets/services/bathroom-3.jpg";
-import commercial1 from "@/assets/services/commercial-1.jpg";
-import commercial2 from "@/assets/services/commercial-2.jpg";
-import commercial3 from "@/assets/services/commercial-3.jpg";
-import loft1 from "@/assets/services/loft-1.jpg";
-import loft2 from "@/assets/services/loft-2.jpg";
-import loft3 from "@/assets/services/loft-3.jpg";
-import outdoor1 from "@/assets/services/outdoor-1.jpg";
-import outdoor2 from "@/assets/services/outdoor-2.jpg";
-import outdoor3 from "@/assets/services/outdoor-3.jpg";
+import { loadProjects, getProjectsByCategories, Project } from "@/lib/projects-data";
 
 const services = [
   {
@@ -35,8 +17,7 @@ const services = [
     slug: "residential",
     description: "Transform your home with our comprehensive residential services. From new builds to complete renovations, we deliver quality results that exceed expectations.",
     items: ["House extensions", "Loft conversions", "Interior renovation", "Basement conversions", "New build homes", "Structural alterations"],
-    category: "Residential",
-    images: [residential1, residential2, residential3]
+    categories: ["Residential", "Extensions"]
   },
   {
     icon: Bath,
@@ -44,8 +25,7 @@ const services = [
     slug: "kitchens-bathrooms",
     description: "Create beautiful, functional spaces with our expert kitchen and bathroom installation services. We handle design through to completion.",
     items: ["Kitchen design & installation", "Bathroom renovation", "Wet rooms", "En-suite bathrooms", "Utility rooms", "Tiling & flooring"],
-    category: "Kitchens",
-    images: [kitchen1, bathroom1, kitchen2]
+    categories: ["Kitchens", "Bathrooms"]
   },
   {
     icon: Building2,
@@ -53,8 +33,7 @@ const services = [
     slug: "commercial",
     description: "Professional commercial construction services for businesses of all sizes across North West London. Minimal disruption, maximum results.",
     items: ["Office fit-outs", "Retail spaces", "Restaurant & hospitality", "Warehouse conversions", "Shop fronts", "Commercial renovations"],
-    category: "Commercial",
-    images: [commercial1, commercial2, commercial3]
+    categories: ["Commercial"]
   },
   {
     icon: Hammer,
@@ -62,8 +41,7 @@ const services = [
     slug: "general-building",
     description: "Reliable building and maintenance services for all your property needs. From minor repairs to major renovations.",
     items: ["Painting & decorating", "Brickwork & masonry", "Plastering", "Carpentry & joinery", "Door & window fitting", "General repairs"],
-    category: "Residential",
-    images: [loft1, loft2, loft3]
+    categories: ["Residential", "Extensions"]
   },
   {
     icon: Fence,
@@ -71,8 +49,7 @@ const services = [
     slug: "outdoor-structural",
     description: "Enhance your property's exterior with our outdoor construction and structural services. Built to last.",
     items: ["Driveways & patios", "Fencing & gates", "Roofing repairs", "Guttering", "Garden walls", "Decking & landscaping"],
-    category: "Extensions",
-    images: [outdoor1, outdoor2, outdoor3]
+    categories: ["Extensions", "Residential"]
   },
   {
     icon: Zap,
@@ -80,8 +57,7 @@ const services = [
     slug: "energy-smart",
     description: "Future-proof your property with energy-efficient and smart home solutions. Save money while helping the environment.",
     items: ["Solar panel installation", "Heat pump systems", "Smart home wiring", "Electrical installations", "Plumbing services", "LED lighting upgrades"],
-    category: "Residential",
-    images: [bathroom2, bathroom3, kitchen3]
+    categories: ["Residential", "Commercial"]
   }
 ];
 
@@ -91,6 +67,18 @@ const truncateText = (text: string, maxLength: number) => {
 };
 
 const Services = () => {
+  const [projectsByService, setProjectsByService] = useState<Record<string, Project[]>>({});
+
+  useEffect(() => {
+    loadProjects().then(() => {
+      const mapped: Record<string, Project[]> = {};
+      services.forEach(service => {
+        mapped[service.slug] = getProjectsByCategories(service.categories).slice(0, 3);
+      });
+      setProjectsByService(mapped);
+    });
+  }, []);
+
   return (
     <>
       <SEO
@@ -116,7 +104,11 @@ const Services = () => {
       <section className="section-padding">
         <div className="container-custom">
           <div className="space-y-0">
-            {services.map((service, index) => (
+            {services.map((service, index) => {
+              const serviceProjects = projectsByService[service.slug] || [];
+              const primaryCategory = service.categories[0];
+              
+              return (
               <div key={index}>
                 <div className="py-10">
                   <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
@@ -167,32 +159,36 @@ const Services = () => {
                       </div>
                     </div>
 
-                    {/* Right: Image thumbnails - Consistent grid showing 3 images */}
+                    {/* Right: Project thumbnails from JSON */}
                     <div className="lg:w-72 flex-shrink-0">
                       <div className="bg-secondary/50 p-3 rounded-lg">
                         <div className="grid grid-cols-3 gap-2">
-                          {[0, 1, 2].map((imgIndex) => (
-                            <div
-                              key={imgIndex}
-                              className="group relative overflow-hidden rounded-md aspect-square bg-muted"
-                            >
-                              {service.images[imgIndex] ? (
-                                <img 
-                                  src={service.images[imgIndex]} 
-                                  alt={`${service.title} project ${imgIndex + 1}`}
-                                  loading="lazy"
-                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                />
-                              ) : (
-                                <div className="w-full h-full flex items-center justify-center">
-                                  <span className="text-muted-foreground text-xs">Coming</span>
-                                </div>
-                              )}
-                            </div>
-                          ))}
+                          {[0, 1, 2].map((imgIndex) => {
+                            const project = serviceProjects[imgIndex];
+                            return (
+                              <Link
+                                key={imgIndex}
+                                to={project ? `/projects/${project.id}` : `/projects?category=${primaryCategory}`}
+                                className="group relative overflow-hidden rounded-md aspect-square bg-muted"
+                              >
+                                {project && project.images[0] ? (
+                                  <img 
+                                    src={project.images[0]} 
+                                    alt={project.title}
+                                    loading="lazy"
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                  />
+                                ) : (
+                                  <div className="w-full h-full flex items-center justify-center">
+                                    <span className="text-muted-foreground text-xs">Coming</span>
+                                  </div>
+                                )}
+                              </Link>
+                            );
+                          })}
                         </div>
                         <Link 
-                          to={`/projects?category=${encodeURIComponent(service.category)}`}
+                          to={`/projects?category=${encodeURIComponent(primaryCategory)}`}
                           className="block text-center text-sm text-primary hover:underline mt-3 font-medium"
                         >
                           View All Projects →
@@ -216,7 +212,8 @@ const Services = () => {
                   </div>
                 )}
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
