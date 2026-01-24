@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, TouchEvent } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProjectCard from "@/components/ProjectCard";
@@ -8,7 +8,8 @@ const ProjectsSlider = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const sliderRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
   useEffect(() => {
     loadProjects().then(loaded => {
@@ -18,7 +19,7 @@ const ProjectsSlider = () => {
   }, []);
 
   // Number of visible cards based on screen size (handled by CSS)
-  const maxIndex = Math.max(0, projects.length - 3);
+  const maxIndex = Math.max(0, projects.length - 1);
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => Math.max(0, prev - 1));
@@ -26,6 +27,26 @@ const ProjectsSlider = () => {
 
   const goToNext = () => {
     setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+  };
+
+  // Touch handlers for swipe
+  const handleTouchStart = (e: TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeDistance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (swipeDistance > minSwipeDistance) {
+      goToNext();
+    } else if (swipeDistance < -minSwipeDistance) {
+      goToPrevious();
+    }
   };
 
   if (loading) {
@@ -43,9 +64,15 @@ const ProjectsSlider = () => {
   return (
     <div className="relative">
       {/* Slider container */}
-      <div className="overflow-hidden" ref={sliderRef}>
+      <div 
+        className="overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Desktop: Show 3 cards sliding */}
         <div 
-          className="flex gap-6 transition-transform duration-500 ease-out"
+          className="hidden lg:flex gap-6 transition-transform duration-500 ease-out"
           style={{ 
             transform: `translateX(-${currentIndex * (100 / 3 + 2)}%)`,
           }}
@@ -53,7 +80,41 @@ const ProjectsSlider = () => {
           {projects.map((project) => (
             <div 
               key={project.id} 
-              className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+              className="flex-shrink-0 w-[calc(33.333%-16px)]"
+            >
+              <ProjectCard project={project} autoChangeImages={true} changeInterval={2500} />
+            </div>
+          ))}
+        </div>
+
+        {/* Tablet: Show 2 cards */}
+        <div 
+          className="hidden sm:flex lg:hidden gap-6 transition-transform duration-500 ease-out"
+          style={{ 
+            transform: `translateX(-${currentIndex * (100 / 2 + 3)}%)`,
+          }}
+        >
+          {projects.map((project) => (
+            <div 
+              key={project.id} 
+              className="flex-shrink-0 w-[calc(50%-12px)]"
+            >
+              <ProjectCard project={project} autoChangeImages={true} changeInterval={2500} />
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile: Show 1 card at a time, full width */}
+        <div 
+          className="flex sm:hidden transition-transform duration-300 ease-out"
+          style={{ 
+            transform: `translateX(-${currentIndex * 100}%)`,
+          }}
+        >
+          {projects.map((project) => (
+            <div 
+              key={project.id} 
+              className="flex-shrink-0 w-full px-1"
             >
               <ProjectCard project={project} autoChangeImages={true} changeInterval={2500} />
             </div>
@@ -61,9 +122,14 @@ const ProjectsSlider = () => {
         </div>
       </div>
 
+      {/* Swipe hint on mobile */}
+      <p className="text-center text-muted-foreground text-sm mt-4 sm:hidden">
+        ← Swipe to see more →
+      </p>
+
       {/* Navigation */}
-      {projects.length > 3 && (
-        <div className="flex items-center justify-center gap-4 mt-8">
+      {projects.length > 1 && (
+        <div className="flex items-center justify-center gap-4 mt-6 sm:mt-8">
           <Button
             variant="outline"
             size="icon"
@@ -76,16 +142,16 @@ const ProjectsSlider = () => {
 
           {/* Dots */}
           <div className="flex gap-2">
-            {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+            {projects.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
                   index === currentIndex 
-                    ? "bg-primary w-6" 
+                    ? "bg-primary w-5" 
                     : "bg-border hover:bg-primary/50"
                 }`}
-                aria-label={`Go to slide ${index + 1}`}
+                aria-label={`Go to project ${index + 1}`}
               />
             ))}
           </div>

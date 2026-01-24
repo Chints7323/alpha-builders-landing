@@ -7,7 +7,7 @@ const LocalBusinessSchema = () => {
     "@type": "LocalBusiness",
     "@id": "https://alphaglobalbuilders.uk/#business",
     "name": "Alpha Global Builders",
-    "image": "https://alphaglobalbuilders.uk/og-image.jpg",
+    "image": "https://alphaglobalbuilders.uk/favicon.jpg",
     "logo": "https://alphaglobalbuilders.uk/favicon.jpg",
     "description": "Trusted, high quality, responsible construction services in Stanmore and North West London. 8+ years experience. Extensions, renovations, kitchens & more.",
     "url": "https://alphaglobalbuilders.uk",

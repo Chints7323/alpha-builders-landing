@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, TouchEvent } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/layout/Layout";
@@ -10,7 +10,7 @@ import TestimonialSlider from "@/components/TestimonialSlider";
 import ProjectsSlider from "@/components/ProjectsSlider";
 import { 
   Phone, Shield, Award, Clock, Home, Building2, 
-  ChevronRight, Bath, Hammer, Fence, Zap
+  ChevronRight, ChevronLeft, Bath, Hammer, Fence, Zap
 } from "lucide-react";
 import heroImage from "@/assets/hero-construction.jpg";
 import { CONTACT_INFO } from "@/lib/constants";
@@ -27,6 +27,9 @@ const serviceItems = [
 
 const Index = () => {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [serviceIndex, setServiceIndex] = useState(0);
+  const servicesTouchStartX = useRef<number>(0);
+  const servicesTouchEndX = useRef<number>(0);
 
   useEffect(() => {
     loadTestimonials().then(() => {
@@ -42,6 +45,36 @@ const Index = () => {
     text: t.text,
     rating: t.rating
   }));
+
+  // Services slider handlers
+  const maxServiceIndex = serviceItems.length - 1;
+  
+  const goToPrevService = () => {
+    setServiceIndex((prev) => Math.max(0, prev - 1));
+  };
+
+  const goToNextService = () => {
+    setServiceIndex((prev) => Math.min(maxServiceIndex, prev + 1));
+  };
+
+  const handleServiceTouchStart = (e: TouchEvent) => {
+    servicesTouchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleServiceTouchMove = (e: TouchEvent) => {
+    servicesTouchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleServiceTouchEnd = () => {
+    const swipeDistance = servicesTouchStartX.current - servicesTouchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (swipeDistance > minSwipeDistance) {
+      goToNextService();
+    } else if (swipeDistance < -minSwipeDistance) {
+      goToPrevService();
+    }
+  };
 
   return (
     <>
@@ -154,7 +187,8 @@ const Index = () => {
             </Button>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Desktop: Grid layout */}
+          <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {serviceItems.map((service, index) => (
               <Link 
                 key={index}
@@ -168,6 +202,78 @@ const Index = () => {
                 <p className="text-muted-foreground text-sm">{service.desc}</p>
               </Link>
             ))}
+          </div>
+
+          {/* Mobile: Swipeable slider */}
+          <div 
+            className="sm:hidden relative"
+            onTouchStart={handleServiceTouchStart}
+            onTouchMove={handleServiceTouchMove}
+            onTouchEnd={handleServiceTouchEnd}
+          >
+            <div 
+              className="flex transition-transform duration-300 ease-out"
+              style={{ transform: `translateX(-${serviceIndex * 100}%)` }}
+            >
+              {serviceItems.map((service, index) => (
+                <div key={index} className="w-full flex-shrink-0 px-1">
+                  <Link 
+                    to={`/services/${service.slug}`}
+                    className="block p-6 bg-card border border-border rounded-lg service-link-hover"
+                  >
+                    <div className="service-icon w-12 h-12 mb-4 bg-primary/10 rounded-lg flex items-center justify-center transition-colors duration-300">
+                      <service.icon className="h-6 w-6 text-primary transition-colors duration-300" />
+                    </div>
+                    <h3 className="service-title text-lg font-bold mb-2 transition-colors duration-300">{service.title}</h3>
+                    <p className="text-muted-foreground text-sm">{service.desc}</p>
+                  </Link>
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile navigation */}
+            <div className="flex items-center justify-center gap-4 mt-6">
+              <Button
+                variant="outline"
+                size="icon"
+                className="rounded-full h-9 w-9"
+                onClick={goToPrevService}
+                disabled={serviceIndex === 0}
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+
+              {/* Dots */}
+              <div className="flex gap-2">
+                {serviceItems.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setServiceIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === serviceIndex 
+                        ? "bg-primary w-5" 
+                        : "bg-border"
+                    }`}
+                    aria-label={`Go to service ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <Button
+                variant="outline"
+                size="icon"
+                className="rounded-full h-9 w-9"
+                onClick={goToNextService}
+                disabled={serviceIndex === maxServiceIndex}
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
+
+            {/* Swipe hint */}
+            <p className="text-center text-muted-foreground text-xs mt-3">
+              ← Swipe to see more →
+            </p>
           </div>
         </div>
       </section>

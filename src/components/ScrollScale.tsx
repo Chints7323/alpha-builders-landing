@@ -10,7 +10,7 @@ const ScrollScale = ({ inverted = false }: ScrollScaleProps) => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const maxOffset = 120;
+      const maxOffset = 150;
       // Move LEFT on scroll DOWN (negative direction), RIGHT on scroll UP
       const direction = inverted ? 1 : -1;
       const newOffset = Math.min(scrollY * 0.08, maxOffset) * direction;
@@ -21,7 +21,8 @@ const ScrollScale = ({ inverted = false }: ScrollScaleProps) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [inverted]);
 
-  const tickCount = 120;
+  // More ticks for wider screens - ensure it's wider than any viewport
+  const tickCount = 300;
   const ticks = Array.from({ length: tickCount }, (_, i) => i);
 
   return (
@@ -30,7 +31,12 @@ const ScrollScale = ({ inverted = false }: ScrollScaleProps) => {
         className="flex items-end gap-0"
         style={{ 
           transform: `translateX(${offset}px)`,
-          transition: 'transform 0.1s ease-out'
+          transition: 'transform 0.1s ease-out',
+          // For inverted (top): anchor to right edge, extend left
+          // For normal (bottom): anchor to left edge, extend right
+          width: 'max-content',
+          marginLeft: inverted ? 'auto' : '-100px',
+          marginRight: inverted ? '-100px' : 'auto',
         }}
       >
         {ticks.map((tick) => {
@@ -38,7 +44,7 @@ const ScrollScale = ({ inverted = false }: ScrollScaleProps) => {
           const isMedium = tick % 5 === 0 && !isMajor;
           
           return (
-            <div key={tick} className="flex flex-col items-center" style={{ width: '12px' }}>
+            <div key={tick} className="flex flex-col items-center flex-shrink-0" style={{ width: '12px' }}>
               <div 
                 className={`w-px ${
                   isMajor 

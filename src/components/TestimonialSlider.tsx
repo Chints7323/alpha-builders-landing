@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, TouchEvent } from "react";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -17,9 +17,11 @@ interface TestimonialSliderProps {
 const TestimonialSlider = ({ testimonials }: TestimonialSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
-  // Show 2 at a time on desktop
-  const itemsPerPage = 2;
+  // Show 2 at a time on desktop, 1 on mobile
+  const itemsPerPage = typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : 2;
   const totalPages = Math.ceil(testimonials.length / itemsPerPage);
 
   useEffect(() => {
@@ -44,6 +46,31 @@ const TestimonialSlider = ({ testimonials }: TestimonialSliderProps) => {
     setCurrentIndex(index);
   };
 
+  // Touch handlers for swipe
+  const handleTouchStart = (e: TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    setIsPaused(true);
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeDistance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (swipeDistance > minSwipeDistance) {
+      // Swipe left - go next
+      goToNext();
+    } else if (swipeDistance < -minSwipeDistance) {
+      // Swipe right - go previous
+      goToPrevious();
+    }
+    
+    setTimeout(() => setIsPaused(false), 5000);
+  };
+
   // Get current testimonials to show
   const startIndex = currentIndex * itemsPerPage;
   const visibleTestimonials = testimonials.slice(startIndex, startIndex + itemsPerPage);
@@ -53,8 +80,11 @@ const TestimonialSlider = ({ testimonials }: TestimonialSliderProps) => {
       className="relative"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
-      {/* Testimonials grid - 2 at a time */}
+      {/* Testimonials grid - 2 at a time on desktop, 1 on mobile */}
       <div className="grid md:grid-cols-2 gap-6">
         {visibleTestimonials.map((testimonial, idx) => (
           <div 
