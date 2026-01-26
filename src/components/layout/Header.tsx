@@ -20,8 +20,8 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 pt-6">
       <div className="container-custom">
         {/* Floating navbar with solid dark background and border */}
-        <div className="relative bg-foreground backdrop-blur-sm rounded-xl shadow-elevated mx-auto max-w-5xl border border-primary/50">
-          <div className="flex items-center justify-between h-16 px-8">
+        <div className="relative bg-foreground backdrop-blur-sm rounded-xl shadow-elevated mx-4 lg:mx-auto lg:max-w-5xl border border-primary/50">
+          <div className="flex items-center justify-between h-14 lg:h-16 px-4 lg:px-8">
             {/* Left Navigation */}
             <nav className="hidden lg:flex items-center gap-8 flex-shrink-0">
               {navItems.map((item) => (
@@ -46,13 +46,13 @@ const Header = () => {
                 isOpen ? "opacity-0 pointer-events-none" : ""
               }`}
             >
-              <div className="bg-background rounded-lg p-0.5 shadow-elevated border-[3px] border-primary">
+              <div className="bg-background rounded-lg p-0.5 shadow-elevated border-2 lg:border-[3px] border-primary">
                 <img 
                   src={logo} 
                   alt="Alpha Global Builders" 
-                  className="h-12 sm:h-14 md:h-[72px] w-auto"
+                  className="h-10 lg:h-[72px] w-auto"
                 />
-              </div>
+              </div>>
             </Link>
 
             {/* Right Actions */}
@@ -84,7 +84,7 @@ const Header = () => {
               <nav className="flex flex-col py-4 px-6">
                 {/* Logo at top of mobile menu - only logo shown here */}
                 <div className="flex justify-center mb-4 pb-4 border-b border-white/20">
-                  <div className="bg-background rounded-lg p-1.5 border-[3px] border-primary">
+                  <div className="bg-background rounded-lg p-1 border-2 border-primary">
                     <img 
                       src={logo} 
                       alt="Alpha Global Builders" 
