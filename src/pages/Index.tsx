@@ -206,7 +206,7 @@ const Index = () => {
 
           {/* Mobile: Swipeable slider */}
           <div 
-            className="sm:hidden relative"
+            className="sm:hidden relative overflow-hidden"
             onTouchStart={handleServiceTouchStart}
             onTouchMove={handleServiceTouchMove}
             onTouchEnd={handleServiceTouchEnd}
