@@ -50,7 +50,7 @@ const Header = () => {
                 <img 
                   src={logo} 
                   alt="Alpha Global Builders" 
-                  className="h-[72px] w-auto"
+                  className="h-12 sm:h-14 md:h-[72px] w-auto"
                 />
               </div>
             </Link>
@@ -88,7 +88,7 @@ const Header = () => {
                     <img 
                       src={logo} 
                       alt="Alpha Global Builders" 
-                      className="h-16 w-auto"
+                      className="h-12 w-auto"
                     />
                   </div>
                 </div>
