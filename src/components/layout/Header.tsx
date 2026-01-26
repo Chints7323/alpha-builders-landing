@@ -52,7 +52,7 @@ const Header = () => {
                   alt="Alpha Global Builders" 
                   className="h-10 lg:h-[72px] w-auto"
                 />
-              </div>>
+              </div>
             </Link>
 
             {/* Right Actions */}
