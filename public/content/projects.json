@@ -16,6 +16,20 @@
       ]
     },
     {
+      "id": "restaurant-fitout-kenton",
+      "title": "Restaurant Interior Renovation and Fit-Out",
+      "category": "Commercial",
+      "location": "Kenton",
+      "description": "Full interior renovation featuring gold mosaic counter, herringbone flooring, and decorating.",
+      "fullDescription": "Complete interior fit-out for a restaurant in Kenton. We built a custom service counter clad in gold hexagonal mosaic tiles with a white worktop. Laid herringbone flooring throughout the space. Painted walls and ceiling, and installed all lighting including wall sconces, pendant chandelier, and ring ceiling light. A warm, inviting space ready for customers.",
+      "completedDate": "November 2025",
+      "images": [
+        "/images/projects/img-20251115-wa0001-1-picsart-aiimageenhancer.jpg",
+        "/images/projects/img-20251115-wa0005-1-picsart-aiimageenhancer.jpg",
+        "/images/projects/img-20251115-wa0000-1-picsart-aiimageenhancer.jpg"
+      ]
+    },
+    {
       "fullDescription": "This family bathroom was completely renovated to create a relaxing retreat. A freestanding bath takes centre stage, complemented by a separate walk-in shower. We installed underfloor heating throughout, along with a heated towel rail. The neutral palette and natural stone tiles create a spa-like atmosphere.",
       "index": 8,
       "location": "Barnet",
@@ -134,20 +148,6 @@
       "id": "side-return-extension",
       "description": "Kitchen extension maximising natural light",
       "category": "Extensions"
-    },
-    {
-      "id": "restaurant-fitout-kenton",
-      "title": "Restaurant Interior Renovation and Fit-Out",
-      "category": "Commercial",
-      "location": "Kenton",
-      "description": "Full interior renovation featuring gold mosaic counter, herringbone flooring, and decorating.",
-      "fullDescription": "Complete interior fit-out for a restaurant in Kenton. We built a custom service counter clad in gold hexagonal mosaic tiles with a white worktop. Laid herringbone flooring throughout the space. Painted walls and ceiling, and installed all lighting including wall sconces, pendant chandelier, and ring ceiling light. A warm, inviting space ready for customers.",
-      "completedDate": "November 2025",
-      "images": [
-        "/images/projects/img-20251115-wa0001-1-picsart-aiimageenhancer.jpg",
-        "/images/projects/img-20251115-wa0005-1-picsart-aiimageenhancer.jpg",
-        "/images/projects/img-20251115-wa0000-1-picsart-aiimageenhancer.jpg"
-      ]
     }
   ]
 }
