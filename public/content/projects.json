@@ -44,13 +44,12 @@
       ]
     },
     {
-      "fullDescription": "A complete transformation of an outdated kitchen into a stunning modern cooking space. We installed custom-built handleless cabinets, quartz worktops, and integrated appliances. The open-plan design now flows seamlessly into the dining area, creating a perfect space for family gatherings and entertaining.",
+      "fullDescription": "A complete transformation of an outdated kitchen into a stunning modern cooking space. We installed custom-built cabinets, quartz worktops, and integrated appliances. The open-plan design now flows seamlessly into the dining area, creating a perfect space for family gatherings and entertaining.",
       "index": 1,
       "location": "Stanmore",
       "title": "Modern Kitchen Renovation",
       "images": [
         "/images/projects/kitchen-1.jpg",
-        "/images/projects/kitchen-2.jpg",
         "/images/projects/kitchen-3.jpg"
       ],
       "completedDate": "March 2024",
@@ -65,7 +64,6 @@
       "title": "Loft Conversion Master Suite",
       "images": [
         "/images/projects/loft-1.jpg",
-        "/images/projects/loft-2.jpg",
         "/images/projects/loft-3.jpg"
       ],
       "completedDate": "January 2024",
@@ -74,29 +72,13 @@
       "category": "Residential"
     },
     {
-      "fullDescription": "A complete bathroom renovation featuring a spacious walk-in shower with rainfall head, wall-hung vanity unit, and heated towel rail. We used large format tiles to create a clean, contemporary look, with underfloor heating for added comfort. Chrome fixtures and LED mirror lighting complete the modern aesthetic.",
-      "index": 3,
-      "location": "Edgware",
-      "title": "Contemporary Bathroom",
-      "images": [
-        "/images/projects/bathroom-1.jpg",
-        "/images/projects/bathroom-2.jpg",
-        "/images/projects/bathroom-3.jpg"
-      ],
-      "completedDate": "February 2024",
-      "id": "contemporary-bathroom",
-      "description": "Modern walk-in shower room with chrome fixtures",
-      "category": "Bathrooms"
-    },
-    {
       "fullDescription": "This rear extension transformed a cramped kitchen into a stunning open-plan living space. Bi-fold doors open onto the garden, blurring the line between indoor and outdoor living. The extension includes a contemporary kitchen, dining area, and family room, with skylights providing abundant natural light throughout.",
       "index": 4,
       "location": "Wembley",
       "title": "Rear House Extension",
       "images": [
         "/images/projects/residential-1.jpg",
-        "/images/projects/residential-2.jpg",
-        "/images/projects/residential-3.jpg"
+        "/images/projects/residential-2.jpg"
       ],
       "completedDate": "December 2023",
       "id": "rear-house-extension",
@@ -110,28 +92,12 @@
       "title": "Office Fit-out",
       "images": [
         "/images/projects/commercial-1.jpg",
-        "/images/projects/commercial-2.jpg",
-        "/images/projects/commercial-3.jpg"
+        "/images/projects/commercial-2.jpg"
       ],
       "completedDate": "November 2023",
       "id": "office-fit-out",
       "description": "Modern open-plan office space with glass partitions",
       "category": "Commercial"
-    },
-    {
-      "fullDescription": "A classic shaker-style kitchen featuring hand-painted cabinets in a timeless grey-green hue. The large central island provides extra storage and a breakfast bar, lit by statement brass pendant lights. Marble-effect worktops and a butler sink complete the traditional English kitchen look.",
-      "index": 6,
-      "location": "Pinner",
-      "title": "Shaker Style Kitchen",
-      "images": [
-        "/images/projects/kitchen-3.jpg",
-        "/images/projects/kitchen-1.jpg",
-        "/images/projects/kitchen-2.jpg"
-      ],
-      "completedDate": "October 2023",
-      "id": "shaker-style-kitchen",
-      "description": "Traditional shaker kitchen with island and pendant lighting",
-      "category": "Kitchens"
     },
     {
       "fullDescription": "By building out into the side return, we created a significantly larger kitchen and dining space. A large rooflight runs the length of the extension, flooding the room with natural light. The result is a bright, airy kitchen that has become the heart of the family home.",
@@ -140,8 +106,7 @@
       "title": "Side Return Extension",
       "images": [
         "/images/projects/residential-2.jpg",
-        "/images/projects/residential-1.jpg",
-        "/images/projects/residential-3.jpg"
+        "/images/projects/residential-1.jpg"
       ],
       "completedDate": "September 2023",
       "id": "side-return-extension",
