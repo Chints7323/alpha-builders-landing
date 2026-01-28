@@ -30,19 +30,18 @@
       ]
     },
     {
-      "fullDescription": "This family bathroom was completely renovated to create a relaxing retreat. A freestanding bath takes centre stage, complemented by a separate walk-in shower. We installed underfloor heating throughout, along with a heated towel rail. The neutral palette and natural stone tiles create a spa-like atmosphere.",
-      "index": 8,
+      "id": "loft-bathroom-barnet",
+      "title": "Loft Bathroom",
+      "category": "Bathrooms",
       "location": "Barnet",
-      "title": "Family Bathroom Renovation",
+      "description": "Loft bathroom with marble-effect tiling, walk-in shower, underfloor heating, and skylight.",
+      "fullDescription": "New bathroom fitted in a loft space in Barnet. We tiled the floor and walls with marble-effect porcelain tiles, working around the sloped ceiling. Installed a walk-in shower enclosure with rainfall showerhead and handheld shower. Fitted a wall-hung toilet with brass flush plate, white vanity unit with basin, and chrome heated towel rail. Built a custom storage cupboard under the eaves. Full plumbing and underfloor heating installation. Natural light from the Velux skylight.",
+      "completedDate": "Oct 2025",
       "images": [
-        "/images/projects/bathroom-3.jpg",
-        "/images/projects/bathroom-1.jpg",
-        "/images/projects/bathroom-2.jpg"
-      ],
-      "completedDate": "August 2023",
-      "id": "family-bathroom-renovation",
-      "description": "Family bathroom with freestanding bath and heated floors",
-      "category": "Bathrooms"
+        "/images/projects/img-20251115-wa0020-1-picsart-aiimageenhancer.jpg",
+        "/images/projects/img-20251115-wa0019-1-picsart-aiimageenhancer.jpg",
+        "/images/projects/img-20251115-wa0021-1-picsart-aiimageenhancer.jpg"
+      ]
     },
     {
       "fullDescription": "A complete transformation of an outdated kitchen into a stunning modern cooking space. We installed custom-built handleless cabinets, quartz worktops, and integrated appliances. The open-plan design now flows seamlessly into the dining area, creating a perfect space for family gatherings and entertaining.",
